@@ -1,0 +1,234 @@
+/* Global html and body settings to prevent overall page scroll */
+html,
+body {
+    height: 100% !important;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* General Styles (Keep existing values where not contradictory) */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header Specific Styles */
+.navbar.pcoded-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0;
+}
+
+/* Logo container styling */
+.b-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+}
+
+/* Styles for the main text logo */
+.logo-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left !important;
+    color: #FFFFFF;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+/* Hiding the image logos that are no longer used (if they were still present or causing issues) */
+.b-brand img.logo,
+.b-brand img.logo-thumb {
+    display: none !important;
+}
+
+
+/* Sidebar default styling */
+.pcoded-navbar {
+    width: 260px;
+    transition: width 0.3s ease, margin-left 0.3s ease, transform 0.3s ease;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: #2f3e47;
+    height: 100%;
+}
+
+.pcoded-navbar .navbar-wrapper .navbar-content {
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* Sidebar collapsed styling (for larger screens) */
+.pcoded-navbar.collapsed {
+    width: 0;
+    margin-left: 0;
+    transform: translateX(0);
+}
+
+/* Main content default */
+.pcoded-main-container {
+    height: calc(100vh - 60px);
+    margin-left: 260px;
+    transition: margin-left 0.3s ease;
+    padding: 0;
+    min-height: auto;
+    overflow-y: auto;
+}
+
+/* When sidebar is collapsed (for larger screens) */
+.pcoded-navbar.collapsed+.pcoded-main-container {
+    margin-left: 60px;
+}
+
+/* Style for the menu toggle button (for larger screens) */
+.menu-toggle {
+    cursor: pointer;
+    padding: 10px;
+    color: white;
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: -40px;
+    background-color: #2f3e47;
+    z-index: 1001;
+    border-radius: 4px;
+}
+
+.menu-toggle i {
+    font-size: 20px;
+}
+
+/* Style for the mobile hamburger icon */
+.mobile-menu-icon {
+    display: none;
+}
+
+/* Hide text labels in collapsed state (larger screens) */
+.pcoded-navbar.collapsed .pcoded-inner-navbar .nav-item>a>.pcoded-mtext {
+    display: none !important;
+}
+
+/* Adjust icon size in collapsed state if needed */
+.pcoded-navbar.collapsed .pcoded-inner-navbar .nav-item>a>.pcoded-micon {
+    font-size: 20px;
+    margin-right: 0;
+}
+
+/* Your .container styles */
+.container {
+    max-width: 100% !important; 
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo-text {
+        font-size: 20px;
+    }
+
+    .pcoded-navbar {
+        width: 260px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        margin-left: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .pcoded-navbar.open {
+        transform: translateX(0);
+    }
+
+    .pcoded-navbar .navbar-wrapper .navbar-content {
+        height: auto;
+        overflow: visible;
+    }
+
+    .pcoded-main-container {
+        margin-left: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 60px;
+    }
+
+    .pcoded-navbar.open+.pcoded-main-container {
+        margin-left: 260px;
+        padding-top: 60px;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .mobile-menu-icon {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1001;
+    }
+
+    .pcoded-navbar.open .pcoded-inner-navbar .nav-item>a>.pcoded-mtext {
+        display: block !important;
+    }
+
+    .nav-item.dropdown {
+        position: relative;
+    }
+
+    .nav-item.dropdown .dropdown-menu {
+        position: absolute !important;
+        top: 100%;
+        left: 0 !important;
+        width: 100%;
+        z-index: 1001;
+        border: 1px solid #ccc;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-top: 2px;
+    }
+
+    .nav-item.dropdown .dropdown-menu.dropdown-menu-right {
+        left: auto !important;
+        right: 0 !important;
+    }
+
+    /* Adjust table-scroll-wrapper for mobile if needed */
+    .table-scroll-wrapper {
+        max-height: calc(100vh - 60px - 10px - 10px - 10px - 15px - 20px);
+    }
+}
+
+/* Larger screens (hide mobile hamburger) */
+@media (min-width: 769px) {
+    .mobile-menu-icon {
+        display: none;
+    }
+}

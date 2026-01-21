@@ -1,0 +1,122 @@
+.auth-wrapper {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.auth-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.menu-img {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .menu-img {
+  transform: scale(1.1);
+}
+
+.br-10 {
+  border-radius: 10px;
+}
+
+.card {
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s forwards ease;
+}
+
+.menu-link {
+  display: block;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-body h5 {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Modern gradient backgrounds */
+.bg-gradient-income {
+  background: linear-gradient(135deg, #00c9a7, #17a2b8);
+}
+
+.bg-gradient-complaint {
+  background: linear-gradient(135deg, #ff6f61, #ff9472);
+}
+
+.bg-gradient-notice {
+  background: linear-gradient(135deg, #ffc107, #ffdd57);
+  color: #333;
+}
+
+.bg-gradient-staff {
+  background: linear-gradient(135deg, #28a745, #a8e063);
+}
+
+.bg-gradient-reports {
+  background: linear-gradient(135deg, #6c757d, #adb5bd);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .menu-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .card {
+    min-height: 180px;
+  }
+
+  .card-body h5 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .auth-wrapper {
+    padding: 0.5rem;
+  }
+
+  .menu-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .card-body h5 {
+    font-size: 0.95rem;
+  }
+}

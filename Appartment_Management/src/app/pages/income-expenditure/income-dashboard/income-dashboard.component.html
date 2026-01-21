@@ -1,0 +1,92 @@
+<div class="dashboard-container" id="dashboard">
+  <h2>Society Financial Dashboard</h2>
+
+  <div *ngIf="isLoading" class="loading-message">
+    <p>Loading financial data...</p>
+  </div>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+    <button (click)="fetchAndProcessTransactions()">Retry</button>
+  </div>
+
+  <div *ngIf="!isLoading && !errorMessage">
+    <div class="summary-cards">
+      <div class="card summary-card income-card">
+        <h3>Total Income</h3>
+        <p class="amount">{{ totalIncome | currency:'INR':'symbol' }}</p>
+      </div>
+      <div class="card summary-card expenditure-card">
+        <h3>Total Expenditure</h3>
+        <p class="amount">{{ totalExpenditure | currency:'INR':'symbol' }}</p>
+      </div>
+      <div class="card summary-card balance-card">
+        <h3>Net Balance</h3>
+        <p class="amount" [ngClass]="{'positive': netBalance >= 0, 'negative': netBalance < 0}">
+          {{ netBalance | currency:'INR':'symbol' }}
+        </p>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="card chart-section" *ngIf="isBrowser">
+        <h3>Monthly Income & Expenditure</h3>
+        <canvas baseChart
+                [data]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [legend]="true"
+                [type]="'line'"> </canvas>
+      </div>
+
+      <div class="card chart-section" *ngIf="isBrowser">
+        <h3>Income vs Expenditure</h3>
+        <canvas baseChart
+                [data]="pieChartData"
+                [labels]="pieChartLabels"
+                [options]="pieChartOptions"
+                [legend]="true"
+                [type]="'pie'">
+        </canvas>
+      </div>
+
+      <div class="card chart-section" *ngIf="isBrowser">
+        <h3>Number of Complaints Attended by Type</h3>
+        <canvas baseChart
+                [data]="complaintsBarChartData"
+                [labels]="complaintsBarChartLabels"
+                [options]="complaintsBarChartOptions"
+                [legend]="false"
+                [type]="'bar'">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="card recent-transactions-section">
+      <h3>Recent Transactions</h3>
+      <div *ngIf="recentTransactions.length > 0; else noRecentTransactions">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let transaction of recentTransactions">
+                <td>{{ transaction.dateOfTransaction | date }}</td>
+                <td>{{ transaction.transactionType }}</td>
+                <td>{{ transaction.category || 'N/A' }}</td>
+                <td>{{ transaction.amount | currency:'INR':'symbol' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <ng-template #noRecentTransactions><p>No recent transactions to display.</p></ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,144 @@
+<div class="container mt-4 p-4 shadow rounded bg-white">
+  <h2 class="text-center mb-4 text-primary fw-bold">
+    Income & Expenditure Report
+  </h2>
+
+  <form [formGroup]="reportForm" (ngSubmit)="generateReport()" class="row g-3">
+    <!-- Month Selection -->
+    <div class="col-md-5">
+      <label for="month" class="form-label">Select Month</label>
+      <select id="month" class="form-select" formControlName="month" required>
+        <option value="" disabled>Select Month</option>
+        <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+      </select>
+    </div>
+
+    <!-- Year Selection -->
+    <div class="col-md-5">
+      <label for="year" class="form-label">Select Year</label>
+      <select id="year" class="form-select" formControlName="year" required>
+        <option value="" disabled>Select Year</option>
+        <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+      </select>
+    </div>
+
+    <!-- Generate Button -->
+    <div class="col-md-2 d-flex align-items-end">
+      <button type="submit" class="btn btn-success w-100">
+        Generate Report
+      </button>
+    </div>
+  </form>
+</div>
+
+
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <h4 class="mb-0">Income &amp; Expenditure Report</h4>
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-outline-success btn-sm" (click)="exportExcel()">
+            <i class="bi bi-file-earmark-excel"></i> Excel
+          </button>
+          <button type="button" class="btn btn-outline-danger btn-sm" (click)="exportPdf()">
+            <i class="bi bi-file-earmark-pdf"></i> PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <form [formGroup]="reportForm" (ngSubmit)="applyFilters()" class="row g-3 align-items-end">
+        <!-- Type -->
+<div class="col-12">
+  <label class="form-label mb-1">Type</label>
+  <select class="form-select" formControlName="type">
+    <option value="all">All</option>
+    <option value="Income">Income</option>
+    <option value="Expenditure">Expenditure</option>
+  </select>
+</div>
+
+
+        <!-- Category -->
+        <div class="col-sm-6 col-md-4">
+          <label class="form-label">Category</label>
+          <select class="form-select" formControlName="category">
+            <option value="">All</option>
+            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+          </select>
+        </div>
+
+        <!-- Optional: Date range -->
+        <div class="col-sm-6 col-md-4">
+          <label class="form-label">From</label>
+          <input type="date" class="form-control" formControlName="fromDate">
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <label class="form-label">To</label>
+          <input type="date" class="form-control" formControlName="toDate">
+        </div>
+
+        <div class="col-12 d-flex gap-2">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-funnel"></i> Apply Filters
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="resetFilters()">
+            <i class="bi bi-arrow-counterclockwise"></i> Reset
+          </button>
+        </div>
+      </form>
+
+      <!-- Active filters badges -->
+      <div class="mt-3"
+           *ngIf="reportForm.value.type !== 'all' || reportForm.value.category || reportForm.value.fromDate || reportForm.value.toDate">
+        <span class="badge text-bg-light me-2" *ngIf="reportForm.value.type !== 'all'">
+          Type: {{ reportForm.value.type }}
+        </span>
+        <span class="badge text-bg-light me-2" *ngIf="reportForm.value.category">
+          Category: {{ reportForm.value.category }}
+        </span>
+        <span class="badge text-bg-light me-2" *ngIf="reportForm.value.fromDate">
+          From: {{ reportForm.value.fromDate | date:'dd-MMM-yyyy' }}
+        </span>
+        <span class="badge text-bg-light me-2" *ngIf="reportForm.value.toDate">
+          To: {{ reportForm.value.toDate | date:'dd-MMM-yyyy' }}
+        </span>
+      </div>
+
+      <!-- Results -->
+      <div class="table-responsive mt-3">
+        <table class="table table-sm table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Category</th>
+              <th>Description</th>
+              <th class="text-end">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let r of filteredRows">
+              <td>{{ r.date | date:'dd-MMM-yyyy' }}</td>
+              <td>{{ r.type }}</td>
+              <td>{{ r.category }}</td>
+              <td>{{ r.description }}</td>
+              <td class="text-end">{{ r.amount | currency:'INR' }}</td>
+            </tr>
+            <tr *ngIf="!filteredRows || filteredRows.length === 0">
+              <td colspan="5" class="text-center py-4 text-muted">No records found</td>
+            </tr>
+          </tbody>
+          <tfoot *ngIf="filteredRows?.length">
+            <tr class="fw-semibold">
+              <td colspan="4" class="text-end">Total</td>
+              <td class="text-end">{{ total | currency:'INR' }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

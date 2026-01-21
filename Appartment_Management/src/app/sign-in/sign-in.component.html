@@ -1,0 +1,56 @@
+<div class="auth-wrapper" [class.blur]="isSubmitting" [attr.aria-busy]="isSubmitting">
+  <div class="logo-text">Radha Krishna Tower</div>
+  <div class="auth-content text-center">
+
+    <div class="card borderless">
+      <div class="row align-items-center">
+        <div class="col-md-12">
+          <div class="card-body">
+            <h4 class="mb-3 f-w-400">Sign in</h4>
+            <hr/>
+
+            <form (ngSubmit)="onSignIn()" #signInForm="ngForm" novalidate>
+              <div class="form-group mb-3">
+                <input type="email" class="form-control" [(ngModel)]="email" name="email" placeholder="Flat Number" />
+
+              </div>
+
+              <div class="form-group mb-4">
+                <input type="password" class="form-control" [(ngModel)]="password" name="password"
+                  placeholder="Password" />
+
+              </div>
+
+              <div *ngIf="errorMessage" class="text-danger mb-3">
+                {{ errorMessage }}
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block mb-4"
+                [disabled]="isSubmitting || signInForm.invalid">
+                Sign in
+              </button>
+            </form>
+
+            <hr />
+
+            <p class="mb-2 text-muted">
+              Forgot password? <a routerLink="/auth/reset-password">Reset</a>
+            </p>
+            <p class="mb-0 text-muted">
+              Don’t have an account? <a routerLink="/auth/sign-up">Signup</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen loading overlay -->
+<div class="loader-overlay" [class.active]="isSubmitting">
+  <div class="spinner-border text-primary spinner-border-lg" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="mt-2 fw-bold text-primary">Loading...</div>
+</div>
+
+</div>

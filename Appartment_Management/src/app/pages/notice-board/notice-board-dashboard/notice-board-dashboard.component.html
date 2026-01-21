@@ -1,0 +1,112 @@
+<div class="dashboard-container">
+  <header class="animated-header">
+    <h1 class="header-text">NOTICE & MEETING</h1>
+  </header>
+
+  <div class="dashboard-main">
+    <!-- Latest Notices Section -->
+    <section class="dashboard-card dashboard-section-animated">
+      <h3 class="card-title text-blue">🗂️ Latest Notices</h3>
+      <div *ngIf="latestNotices.length; else noNotice" class="card-grid">
+        <div
+          *ngFor="let notice of showAllNotices ? latestNotices : latestNotices.slice(0,5)"
+          class="notice-card-item"
+        >
+          <div class="notice-card-content">
+            <div class="card-text-container">
+              <strong class="card-title-text">{{ notice.title }}</strong>
+              <small class="card-date-text">
+                Posted: {{ notice.created_at | date:'mediumDate' }}
+              </small>
+              <p class="card-description-text line-clamp-3">
+                {{ notice.description }}
+              </p>
+            </div>
+            <button (click)="openNoticeModal(notice)" class="view-btn">View</button>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="latestNotices.length > 5" (click)="toggleNotices()" class="see-more-btn">
+        {{ showAllNotices ? 'Show Less' : 'See All' }}
+      </button>
+      <ng-template #noNotice><p>No notices found.</p></ng-template>
+    </section>
+
+    <!-- Latest Meetings Section -->
+    <section class="dashboard-card meetings-section dashboard-section-animated">
+      <h3 class="card-title text-green">📅 Latest Meetings</h3>
+      <div *ngIf="latestMeetings.length; else noMeeting" class="card-grid">
+        <div
+          *ngFor="let meeting of showAllMeetings ? latestMeetings : latestMeetings.slice(0,5)"
+          class="meeting-card-item"
+        >
+          <div class="meeting-card-content">
+            <div class="card-text-container">
+              <strong class="card-title-text">
+                {{ meeting.type || meeting.title }} - {{ meeting.location }}
+              </strong>
+              <small class="card-date-text">
+                Date: {{ meeting.dateTime | date:'mediumDate' }}
+              </small>
+              <p class="card-description-text line-clamp-3">
+                {{ meeting.description || 'No description available.' }}
+              </p>
+            </div>
+            <button (click)="openMeetingModal(meeting)" class="view-btn">View</button>
+          </div>
+        </div>
+      </div>
+      <button *ngIf="latestMeetings.length > 5" (click)="toggleMeetings()" class="see-more-btn">
+        {{ showAllMeetings ? 'Show Less' : 'See All' }}
+      </button>
+      <ng-template #noMeeting><p>No meetings found.</p></ng-template>
+    </section>
+
+    <!-- Notice Detail Modal -->
+    <div class="modal-overlay" *ngIf="showNoticeDetailModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-blue">Notice Details</h3>
+          <button class="close-btn" (click)="closeNoticeDetailModal()">×</button>
+        </div>
+        <div class="modal-body" *ngIf="selectedNotice">
+          <p><strong>Title:</strong> {{ selectedNotice.title }}</p>
+          <p><strong>Posted:</strong> {{ selectedNotice.created_at | date:'medium' }}</p>
+          <p class="modal-description-heading"><strong>Description:</strong></p>
+          <p>{{ selectedNotice.description }}</p>
+
+          <!-- New Download Button -->
+          <div *ngIf="selectedNotice.file_name" class="mt-3">
+            <button class="view-btn" (click)="downloadNoticeAttachment(selectedNotice)">
+              📎 Download Attachment
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Meeting Detail Modal -->
+    <div class="modal-overlay" *ngIf="showMeetingDetailModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title text-green">Meeting Details</h3>
+          <button class="close-btn" (click)="closeMeetingDetailModal()">×</button>
+        </div>
+        <div class="modal-body" *ngIf="selectedMeeting">
+          <p><strong>Title:</strong> {{ selectedMeeting.type || selectedMeeting.title }}</p>
+          <p><strong>Location:</strong> {{ selectedMeeting.location }}</p>
+          <p><strong>Date & Time:</strong> {{ selectedMeeting.dateTime | date:'medium' }}</p>
+          <p><strong>Called By:</strong> {{ selectedMeeting.called_by }}</p>
+          <p><strong>Created By:</strong> {{ selectedMeeting.created_by }}</p>
+          <p><strong>Status:</strong> {{ selectedMeeting.status }}</p>
+          <p class="modal-description-heading"><strong>Description:</strong></p>
+          <p>{{ selectedMeeting.description || 'No description available.' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dashboard-footer text-center">
+    <p>&copy; {{ currentYear }} Notice Board Dashboard. All rights reserved.</p>
+  </footer>
+</div>

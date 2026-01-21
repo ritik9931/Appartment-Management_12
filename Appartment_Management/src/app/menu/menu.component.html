@@ -1,0 +1,16 @@
+<div class="auth-wrapper" [style.backgroundImage]="'url(assets/images/auth/img-menu-big.jpg)'">
+  <div class="auth-content container">
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-lg-4" *ngFor="let card of menuCards; let i = index">
+        <a [routerLink]="[card.route]" class="menu-link" [style.animationDelay]="(i * 100) + 'ms'">
+          <div class="card shadow-sm br-10 text-white" [ngClass]="card.bgClass">
+            <div class="card-body text-center">
+              <img class="menu-img" [src]="card.image" [alt]="card.title" />
+              <h5 class="mt-3">{{ card.title }}</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

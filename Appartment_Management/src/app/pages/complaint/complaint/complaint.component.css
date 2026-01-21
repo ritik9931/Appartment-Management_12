@@ -1,0 +1,74 @@
+/* Container styling */
+.complaint-form-container {
+  background: #fff;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  max-width: 100%;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Sticky table header */
+.complaints-table-container thead th {
+  position: sticky;
+  top: 0;
+  background: lightblue;
+  z-index: 10;
+}
+
+/* Table scroll */
+.complaints-table-container {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+}
+
+/* Table text alignment */
+.table td,
+.table th {
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* Responsive form grid for smaller screens */
+@media (max-width: 767.98px) {
+  .complaint-form-container .row > div {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Increase spacing between inputs on mobile */
+  .complaint-form-container .form-label {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Make buttons full width on mobile */
+  .complaint-form-container button.btn {
+    width: 100%;
+    padding: 0.75rem 0;
+  }
+
+  /* Adjust table font size on small devices */
+  .table {
+    font-size: 0.85rem;
+  }
+
+  /* Scroll horizontally for wide tables */
+  .complaints-table-container {
+    max-height: none;
+    overflow-x: auto;
+  }
+
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

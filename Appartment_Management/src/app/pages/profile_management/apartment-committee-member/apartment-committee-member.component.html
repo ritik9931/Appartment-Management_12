@@ -1,0 +1,159 @@
+<div class="container mt-4">
+  <!-- Message Display Area -->
+  <div *ngIf="message" [ngClass]="{'success-message': messageType === 'success', 'error-message': messageType === 'error'}" class="app-message">
+    {{ message }}
+  </div>
+
+  <div *ngIf="isAddingNew" class="add-committee-member-form">
+    <h3>{{ currentEditId !== null ? 'Edit' : 'Add New' }} Committee Member</h3>
+    <form [formGroup]="committeeForm" (ngSubmit)="onSaveCommitteeMember()" novalidate>
+      <div class="form-row">
+        <!-- Name -->
+<!-- Name -->
+<div class="form-group">
+  <label>Name</label>
+  <select class="form-control" formControlName="name" (change)="onUserSelect($event)">
+    <option value="" disabled selected>Select Name</option>
+    <option *ngFor="let user of userOptions" [value]="user.name">
+      {{ user.name }} ({{ user.user_type }})
+    </option>
+  </select>
+  <div *ngIf="committeeForm.get('name')?.touched && committeeForm.get('name')?.invalid" class="error-message">
+    Name is required.
+  </div>
+</div>
+
+
+        <!-- Designation -->
+        <div class="form-group">
+          <label>Designation</label>
+          <select class="form-control" formControlName="designation" required>
+            <option value="" disabled selected>Select Designation</option>
+            <option value="President">President</option>
+            <option value="Vice President">Vice President</option>
+            <option value="Secretary">Secretary</option>
+            <option value="Joint Secretary">Joint Secretary</option>
+            <option value="Treasurer">Treasurer</option>
+            <option value="Executive Member">Executive Member</option>
+            <option value="Director">Director</option>
+          </select>
+          <div *ngIf="committeeForm.get('designation')?.touched && committeeForm.get('designation')?.invalid" class="error-message">
+            Designation is required.
+          </div>
+        </div>
+
+        <!-- Contact Number -->
+        <div class="form-group">
+          <label>Contact Number</label>
+          <input type="text" class="form-control" formControlName="contactNumber" placeholder="Enter Contact Number" required>
+          <div *ngIf="committeeForm.get('contactNumber')?.touched && committeeForm.get('contactNumber')?.invalid" class="error-message">
+            Contact Number is required.
+          </div>
+        </div>
+
+        <!-- From Date -->
+        <div class="form-group">
+          <label>From Date</label>
+          <input type="date" class="form-control" formControlName="from_date" required>
+          <div *ngIf="committeeForm.get('from_date')?.touched && committeeForm.get('from_date')?.invalid" class="error-message">
+            From Date is required.
+          </div>
+        </div>
+
+        <!-- To Date -->
+        <div class="form-group">
+          <label>To Date</label>
+          <input type="date" class="form-control" formControlName="to_date" required>
+          <div *ngIf="committeeForm.get('to_date')?.touched && committeeForm.get('to_date')?.invalid" class="error-message">
+            To Date is required.
+          </div>
+        </div>
+
+        <!-- Is Active -->
+        <div class="form-group">
+          <label>Is Active</label>
+          <select class="form-control" formControlName="is_active">
+            <option [value]="'true'">Active</option>
+            <option [value]="'false'">Inactive</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="button-group mt-3">
+        <button type="submit" class="primary-button">{{ currentEditId !== null ? 'Update' : 'Save' }}</button>
+        <button type="button" class="secondary-button" (click)="resetFormState()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <hr class="my-4 section-divider">
+
+  <div class="committee-member-list">
+    <h3>Committee Members</h3>
+    <div class="list-controls">
+      <!-- SHOW ONLY TO ADMIN -->
+      <button class="primary-button add-new-button" *ngIf="!isAddingNew && isAdmin" (click)="onAddCommitteeMember()">
+        Add New Committee Member
+      </button>
+
+      <div class="search-export-controls">
+        <div class="search-container">
+          <input type="text" placeholder="Search by name or designation..." [(ngModel)]="searchTerm" (input)="onSearchChange()" />
+          <i class="bi bi-search"></i>
+        </div>
+        <button class="export-button" (click)="exportToExcel()">
+          <i class="bi bi-file-earmark-spreadsheet"></i> Export to Excel
+        </button>
+      </div>
+    </div>
+
+<div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Designation</th>
+          <th>Contact Number</th>
+          <th>From Date</th>
+          <th>To Date</th>
+          <!-- SHOW ACTIONS COLUMN ONLY TO ADMIN -->
+          <th *ngIf="isAdmin">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let member of pagedCommitteeMemberList; index as i">
+          <td>{{ member.name }}</td>
+          <td>{{ member.designation }}</td>
+          <td>{{ member.contactNumber }}</td>
+          <td>{{ member.from_date | date:'yyyy-MM-dd' }}</td>
+          <td>{{ member.to_date | date:'yyyy-MM-dd' }}</td>
+          <!-- SHOW ACTION BUTTONS ONLY TO ADMIN -->
+          <td *ngIf="isAdmin">
+            <div class="d-flex gap-2">
+              <button class="action-button edit-button" (click)="editCommitteeMember(member)" title="Edit">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="action-button delete-button" (click)="confirmDelete(member.id)" title="Delete">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="pagedCommitteeMemberList.length === 0">
+          <td colspan="6" class="no-data-message">No committee members found.</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+    <div class="pagination-controls" *ngIf="totalFilteredMembers > itemsPerPage || totalPages > 1">
+      <button class="pagination-button" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="pagination-button" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+      <select [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+        <option value="5">5 per page</option>
+        <option value="10">10 per page</option>
+        <option value="20">20 per page</option>
+      </select>
+    </div>
+  </div>
+</div>

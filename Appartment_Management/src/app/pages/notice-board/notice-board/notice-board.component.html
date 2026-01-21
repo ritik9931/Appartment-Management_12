@@ -1,0 +1,189 @@
+<div class="notice-board-wrapper p-3">
+  <div class="notice-board-card shadow rounded bg-white p-4">
+    <div class="text-center mb-4">
+      <h2 class="section-title animated-header">🗂️ All Notices</h2>
+    </div>
+
+    <!-- Admin Add Button -->
+    <div *ngIf="isAdmin" class="mb-3 text-end">
+      <button class="btn btn-primary" (click)="showForm = !showForm">
+        {{ showForm ? 'Cancel' : '➕ Add New Notice' }}
+      </button>
+    </div>
+
+    <!-- Form -->
+    <div *ngIf="isAdmin && showForm" class="mb-4">
+      <form [formGroup]="noticeForm" (ngSubmit)="onPostNotice()" enctype="multipart/form-data" novalidate>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" formControlName="title"
+              aria-label="Notice title input" />
+            <div class="text-danger small" *ngIf="noticeForm.get('title')?.touched && noticeForm.get('title')?.invalid">
+              Title is required.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="expiryDate" class="form-label">Expiry Date</label>
+            <input type="date" class="form-control" id="expiryDate" formControlName="expiryDate" [min]="todayString"
+              aria-label="Notice expiry date input" />
+            <div class="text-danger small"
+              *ngIf="noticeForm.get('expiryDate')?.touched && noticeForm.get('expiryDate')?.invalid">
+              Expiry date is required.
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" rows="3" formControlName="description"
+              aria-label="Notice description"></textarea>
+            <div class="text-danger small"
+              *ngIf="noticeForm.get('description')?.touched && noticeForm.get('description')?.invalid">
+              Description is required.
+            </div>
+          </div>
+          <div class="col-12">
+            <label for="attachment" class="form-label">Attachment (PDF, JPG, PNG)</label>
+            <input type="file" class="form-control" id="attachment" (change)="onFileChange($event)" />
+            <p class="text-muted mt-1" *ngIf="selectedFile">Selected file: {{ selectedFile.name }}</p>
+            <div *ngIf="errorMessage" class="text-danger mt-1 small">{{ errorMessage }}</div>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary" [disabled]="noticeForm.invalid || loading">
+              <span *ngIf="!loading">Post Notice</span>
+              <span *ngIf="loading">
+                <span class="spinner-border spinner-border-sm me-2" role="status"></span>Posting...
+              </span>
+            </button>
+          </div>
+        </div>
+      </form>
+      <hr />
+    </div>
+
+    <!-- Search -->
+    <div class="search-box mb-3">
+      <input type="text" class="form-control" placeholder="🔍 Search notices..." [(ngModel)]="searchTerm"
+        (ngModelChange)="filterNotices()" />
+    </div>
+
+    <!-- Table -->
+    <div *ngIf="paginatedNotices().length > 0" class="table-responsive mb-3">
+      <table class="table table-bordered table-hover notice-table">
+        <thead class="table-light">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Posted</th>
+            <th>Expiry</th>
+            <th>Attachment</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let notice of paginatedNotices()" [ngClass]="{ 'bg-light-danger': isNoticeExpired(notice) }">
+            <td>{{ notice.title }}</td>
+            <td>{{ notice.description | slice: 0:60 }}<span *ngIf="notice.description.length > 60">...</span></td>
+            <td>{{ notice.postedDate | date: 'mediumDate' }}</td>
+            <td>
+              {{ notice.expiryDate | date: 'shortDate' }}
+              <div *ngIf="isNoticeExpired(notice)" class="text-danger fw-bold">⚠️ Expired</div>
+            </td>
+            <td>
+              <button *ngIf="notice.file_name" class="btn btn-sm btn-outline-primary"
+                (click)="downloadAttachment(notice)">
+                📎 Download
+              </button>
+            </td>
+            <td>
+              <div class="btn-group" role="group">
+                <!-- View -->
+                <button class="btn btn-primary btn-sm" (click)="openNoticeModal(notice)" title="View Notice">
+                  <i class="bi bi-eye-fill me-1"></i>
+                </button>
+
+                <!-- Delete -->
+                <button *ngIf="isAdmin" class="btn btn-danger btn-sm" (click)="deleteNotice(notice.id)"
+                  title="Delete Notice">
+                  <i class="bi bi-trash-fill me-1"></i>
+                </button>
+
+                <!-- Archive -->
+                <!-- <button *ngIf="isAdmin" class="btn btn-secondary btn-sm" (click)="archiveNotice(notice.id)"
+                  title="Archive Notice">
+                  <i class="bi bi-archive-fill me-1"></i>
+                </button> -->
+              </div>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div *ngIf="paginatedNotices().length > 0" class="pagination text-center">
+      <button class="btn btn-outline-primary btn-sm me-2" (click)="prevPage()" [disabled]="currentPage === 0">«
+        Prev</button>
+      <button *ngFor="let page of totalPagesArray(); let i = index" class="btn btn-sm"
+        [class.btn-primary]="currentPage === i" [class.btn-outline-primary]="currentPage !== i" (click)="goToPage(i)">
+        {{ i + 1 }}
+      </button>
+      <button class="btn btn-outline-primary btn-sm ms-2" (click)="nextPage()"
+        [disabled]="currentPage === totalPages - 1">Next »</button>
+    </div>
+
+    <!-- No Data -->
+    <div *ngIf="paginatedNotices().length === 0 && !loading" class="text-center text-muted mt-4">
+      <p>No notices found.</p>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center my-4">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;" *ngIf="showToast">
+    <div class="toast align-items-center text-bg-success border-0 show">
+      <div class="d-flex">
+        <div class="toast-body">✅ Notice posted successfully!</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showToast = false"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for View -->
+<div class="modal fade" id="viewNoticeModal" #viewModal tabindex="-1" aria-labelledby="viewNoticeModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content zoom-modal" *ngIf="selectedNotice">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewNoticeModalLabel">{{ selectedNotice.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Description:</strong></p>
+        <p>{{ selectedNotice.description }}</p>
+
+        <p class="text-muted"><small>📅 Posted on: {{ selectedNotice.postedDate | date: 'medium' }}</small></p>
+        <p *ngIf="selectedNotice.expiryDate"><small>⏳ Expires on: {{ selectedNotice.expiryDate | date: 'shortDate'
+            }}</small></p>
+        <p *ngIf="selectedNotice.created_by"><small>👤 Created by: {{ selectedNotice.created_by }}</small></p>
+
+        <div *ngIf="selectedNotice.file_name" class="mt-3">
+          <strong>Attachment:</strong><br />
+          <button class="btn btn-outline-primary btn-sm mt-1" (click)="downloadAttachment(selectedNotice!)">
+            📎 Download Attachment
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

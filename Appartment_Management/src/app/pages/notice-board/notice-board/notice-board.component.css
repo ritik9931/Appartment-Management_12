@@ -1,0 +1,286 @@
+/* ========== Layout & Wrapper ========== */
+.notice-board-wrapper {
+  background-color: #f0f2f5;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+
+.notice-board-card {
+  max-width: 1000px;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* ========== Animated Header ========== */
+.section-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(-25px);
+  animation: fadeSlideDown 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeSlideDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== Form ========== */
+form {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgb(0 0 0 / 0.05);
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #495057;
+}
+
+input.form-control,
+textarea.form-control {
+  border: 1.5px solid #ced4da;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input.form-control:focus,
+textarea.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+/* ========== Buttons ========== */
+.add-notice-btn {
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.action-buttons button {
+  min-width: 120px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-secondary {
+  background-color: #95a5a6;
+}
+
+.btn-secondary:hover {
+  background-color: #7f8c8d;
+}
+
+.btn-group > button {
+  margin-right: 0.5rem;
+}
+
+.btn-group > button:last-child {
+  margin-right: 0;
+}
+
+/* ========== Search Box ========== */
+.search-box {
+  margin-bottom: 1rem;
+  max-width: 300px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  border: 1.5px solid #ced4da;
+  transition: border-color 0.3s ease;
+}
+
+.search-box input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* ========== Table ========== */
+.table-scroll-container {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+}
+
+.notice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.notice-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f4f6f8;
+  z-index: 10;
+  border-bottom: 2px solid #dee2e6;
+  white-space: nowrap;
+}
+
+.notice-table th,
+.notice-table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e1e1e1;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.notice-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.bg-light-danger {
+  background-color: #fff3f3 !important;
+  border-left: 5px solid #e74c3c;
+}
+
+/* ========== Pagination ========== */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  border: 1px solid #007bff;
+  background-color: #fff;
+  color: #007bff;
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination button.active,
+.pagination button.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* ========== Modals ========== */
+.modal-content {
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 0.5rem;
+}
+
+.modal-title {
+  font-weight: 700;
+  color: #34495e;
+}
+
+.modal-body p {
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Modal Animation */
+.modal.fade .modal-dialog {
+  transform: scale(0.95);
+  transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+}
+
+/* Attachment link */
+.btn-link {
+  font-size: 0.9rem;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+  color: #0056b3;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ========== Responsive Design ========== */
+@media (max-width: 767px) {
+  .col-md-6,
+  form .row.g-3 > div {
+    max-width: 100% !important;
+    flex: 1 0 100% !important;
+  }
+
+  .text-end {
+    text-align: left !important;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+
+  .notice-table th,
+  .notice-table td {
+    font-size: 0.9rem;
+  }
+}

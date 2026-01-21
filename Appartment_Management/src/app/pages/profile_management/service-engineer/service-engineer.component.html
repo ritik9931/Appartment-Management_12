@@ -1,0 +1,122 @@
+<div class="container">
+  <div *ngIf="isAddingNew" class="add-engineer-form">
+    <h3>{{ isEditing ? 'Edit' : 'Add New' }} Service Engineer</h3>
+    <form [formGroup]="serviceEngineerForm" (ngSubmit)="onSaveServiceEngineer()" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="name">Vendor Name</label>
+          <input type="text" id="name" formControlName="name" required />
+          <div *ngIf="serviceEngineerForm.get('name')?.invalid && serviceEngineerForm.get('name')?.touched" class="error-message">
+            Vendor Name is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="vendorType">Vendor Type</label>
+          <select id="vendorType" formControlName="vendorType" required>
+            <option value="">Select Vendor Type</option>
+            <option value="Plumber">Plumber</option>
+            <option value="Electrician">Electrician</option>
+            <option value="Carpenter">Carpenter</option>
+            <option value="Other">Other</option>
+          </select>
+          <div *ngIf="serviceEngineerForm.get('vendorType')?.invalid && serviceEngineerForm.get('vendorType')?.touched" class="error-message">
+            Vendor Type is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contactNumber">Contact Number</label>
+          <input type="text" id="contactNumber" formControlName="contactNumber" required />
+          <div *ngIf="serviceEngineerForm.get('contactNumber')?.invalid && serviceEngineerForm.get('contactNumber')?.touched" class="error-message">
+            Contact Number is required.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="isActive">Is Active</label>
+          <select id="isActive" formControlName="isActive" required>
+            <option value="">Select Status</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <div *ngIf="serviceEngineerForm.get('isActive')?.invalid && serviceEngineerForm.get('isActive')?.touched" class="error-message">
+            Status is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="remarks">Remarks</label>
+        <textarea id="remarks" formControlName="remarks" rows="3"></textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="primary-button">{{ isEditing ? 'Update' : 'Save' }}</button>
+        <button type="button" class="secondary-button" (click)="resetFormState()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="engineer-list">
+    <h3>Service Engineer List</h3>
+    <div class="list-controls">
+      <button class="primary-button add-new-button" *ngIf="!isAddingNew && isAdmin" (click)="onAddServiceEngineer()">
+        Add New Service Engineer
+      </button>
+      <div class="search-container">
+        <input type="text" placeholder="Search by name or type..." [(ngModel)]="searchTerm" (input)="onSearchChange()" />
+        <i class="bi bi-search"></i>
+      </div>
+    </div>
+<div class="table-responsive">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Vendor Name</th>
+          <th>Vendor Type</th>
+          <th>Contact Number</th>
+          <th>Is Active</th>
+          <th>Remarks</th>
+          <th *ngIf="isAdmin">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let engineer of pagedServiceEngineerList">
+          <td>{{ engineer.name }}</td>
+          <td>{{ engineer.vendorType }}</td>
+          <td>{{ engineer.contactNumber }}</td>
+          <td>{{ engineer.isActive }}</td>
+          <td>{{ engineer.remarks }}</td>
+          <td *ngIf="isAdmin">
+            <div class="d-flex gap-2">
+              <button class="action-button edit-button" (click)="editServiceEngineer(engineer)" title="Edit">
+                <i class="bi bi-pencil-square"></i>
+              </button>
+              <button class="action-button delete-button" (click)="confirmDelete(engineer.id)" title="Delete">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+        <tr *ngIf="pagedServiceEngineerList.length === 0">
+          <td [attr.colspan]="isAdmin ? 6 : 5" class="no-data-message">No service engineers found.</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+    <div class="pagination-controls" *ngIf="totalFilteredEngineers > itemsPerPage">
+      <button class="pagination-button" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+      <span class="page-info">Page {{ currentPage }} of {{ totalPages }}</span>
+      <button class="pagination-button" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+      <select [(ngModel)]="itemsPerPage" (change)="onItemsPerPageChange()">
+        <option value="5">5 per page</option>
+        <option value="10">10 per page</option>
+        <option value="20">20 per page</option>
+      </select>
+    </div>
+  </div>
+  <hr class="section-divider" />
+</div>

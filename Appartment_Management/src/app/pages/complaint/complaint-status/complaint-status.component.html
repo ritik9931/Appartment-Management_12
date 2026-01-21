@@ -1,0 +1,78 @@
+<div class="container mt-4 complaint-status-container shadow rounded p-4 bg-white">
+  <h3 class="mb-4 text-primary fw-bold">
+    <i class="bi bi-list-check me-2"></i> Complaint Status Tracker
+  </h3>
+
+  <!-- Search -->
+  <div class="mb-3">
+    <input type="text" class="form-control" [(ngModel)]="searchText" (input)="applyFilter()"
+           placeholder="Search by user ID, type, or status">
+  </div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped text-center align-middle">
+      <thead class="table-light sticky-top">
+        <tr>
+          <th>#</th>
+          <th>User ID</th>
+          <th>Type</th>
+          <th>Submitted On</th>
+          <th>Status</th>
+          <th>Closed On</th>
+          <th *ngIf="isAdmin">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of pagedComplaints(); let i = index">
+          <td>{{ (page - 1) * pageSize + i + 1 }}</td>
+          <td>{{ c.user_id }}</td>
+          <td>{{ c.comp_type }}</td>
+          <td>{{ c.created_at | date: 'mediumDate' }}</td>
+
+          <!-- Editable status for admin -->
+          <td *ngIf="editRow === c.id && isAdmin">
+            <select [(ngModel)]="c.comp_status" class="form-select form-select-sm">
+              <option>Open</option>
+              <option>In Progress</option>
+              <option>Resolved</option>
+              <option>Closed</option>
+            </select>
+          </td>
+          <td *ngIf="!(editRow === c.id && isAdmin)">
+            <span [class]="statusClass(c.comp_status)">{{ c.comp_status }}</span>
+          </td>
+          <td>
+            {{ c.close_on ? (c.close_on | date: 'mediumDate') : '-' }}
+          </td>
+
+          <td *ngIf="isAdmin">
+            <button *ngIf="editRow !== c.id" class="btn btn-sm btn-outline-primary" (click)="startEdit(c.id)">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button *ngIf="editRow === c.id" class="btn btn-sm btn-success" (click)="saveEdit(c)">
+              <i class="bi bi-check-lg"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center mt-3">
+    <nav>
+      <ul class="pagination pagination-sm">
+        <li class="page-item" [class.disabled]="page === 1">
+          <button class="page-link" (click)="page = page - 1" [disabled]="page === 1">Previous</button>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">Page {{ page }}</span>
+        </li>
+        <li class="page-item" [class.disabled]="(page * pageSize) >= filteredComplaints(true).length">
+          <button class="page-link" (click)="page = page + 1" [disabled]="(page * pageSize) >= filteredComplaints(true).length">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

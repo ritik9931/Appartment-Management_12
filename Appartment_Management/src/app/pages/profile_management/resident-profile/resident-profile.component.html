@@ -1,0 +1,461 @@
+<div class="container mt-4">
+  <div *ngIf="isAddingNew && isAdmin">
+    <h3 class="mb-4">Add New Resident</h3>
+    <form [formGroup]="residentForm" (ngSubmit)="onSaveResident($event)" novalidate>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="userId">User ID</label>
+          <input id="userId" type="text" class="form-control" formControlName="userId" required>
+          <div *ngIf="residentForm.get('userId')?.invalid && residentForm.get('userId')?.touched" class="text-danger">
+            User ID is Flat Number.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="password">Password</label>
+          <input id="password" type="password" class="form-control" formControlName="password">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="name">Name</label>
+          <input id="name" type="text" class="form-control" formControlName="name" required>
+          <div *ngIf="residentForm.get('name')?.invalid && residentForm.get('name')?.touched" class="text-danger">
+            Name is required.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="userType">User Type</label>
+          <select id="userType" class="form-control" formControlName="userType" required>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="contactNumber">Contact Number</label>
+          <input id="contactNumber" type="text" class="form-control" formControlName="contactNumber" required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="emailAddress">Email Address</label>
+          <input id="emailAddress" type="email" class="form-control" formControlName="emailAddress" required>
+          <div *ngIf="residentForm.get('emailAddress')?.touched && residentForm.get('emailAddress')?.invalid"
+            class="text-danger">
+            <div *ngIf="residentForm.get('emailAddress')?.errors?.['required']">Email is required.</div>
+            <div *ngIf="residentForm.get('emailAddress')?.errors?.['email']">Invalid email format.</div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="alternateContactNumber">Alternate Contact Number</label>
+          <input id="alternateContactNumber" type="text" class="form-control" formControlName="alternateContactNumber">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="numberOfFamilyMembers">Number of Family Members</label>
+          <input id="numberOfFamilyMembers" type="number" class="form-control" formControlName="numberOfFamilyMembers">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="flatNumber">Flat Number</label>
+          <input id="flatNumber" type="text" class="form-control" formControlName="flatNumber" required>
+          <div *ngIf="residentForm.get('flatNumber')?.invalid && residentForm.get('flatNumber')?.touched"
+            class="text-danger">
+            Flat Number is required.
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="flatType">Flat Type</label>
+          <select id="flatType" class="form-control" formControlName="flatType">
+            <option value="1BHK">1 BHK</option>
+            <option value="2BHK">2 BHK</option>
+            <option value="3BHK">3 BHK</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label>Car Parking</label><br>
+          <div class="car-parking-group">
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="carYes" [value]="true" formControlName="carParking">
+              <label for="carYes" class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="carNo" [value]="false" formControlName="carParking">
+              <label for="carNo" class="form-check-label">No</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mb-3" *ngIf="residentForm.get('carParking')?.value === true || residentForm.get('carParking')?.value === 'true'">
+          <label for="numberOfCarParkingSlots">Number of Car Parking Slots</label>
+          <input id="numberOfCarParkingSlots" type="number" class="form-control"
+            formControlName="numberOfCarParkingSlots">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="maintenanceCharges">Maintenance Charges</label>
+          <input id="maintenanceCharges" type="number" class="form-control" formControlName="maintenanceCharges">
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="currentResident">Current Resident</label>
+          <select id="currentResident" class="form-control" formControlName="currentResident">
+            <option value="Owner">Owner</option>
+            <option value="Tenant">Tenant</option>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label for="saleDeedDoc">Sale Deed Document</label>
+          <input type="file" class="form-control" id="saleDeedDoc" accept=".pdf,.jpg,.png"
+            (change)="onFileUpload($event, 'saleDeedDoc')" />
+        </div>
+
+      </div>
+
+      <div *ngIf="residentForm.get('currentResident')?.value === 'Tenant'">
+        <h5 class="mt-4">Tenant Information</h5>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="tenantName">Tenant Name</label>
+            <input id="tenantName" type="text" class="form-control" formControlName="tenantName">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantContactNumber">Tenant Contact Number</label>
+            <input id="tenantContactNumber" type="text" class="form-control" formControlName="tenantContactNumber">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantAlternateContactNumber">Tenant Alternate Contact Number</label>
+            <input id="tenantAlternateContactNumber" type="text" class="form-control"
+              formControlName="tenantAlternateContactNumber">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantFromDate">From Date</label>
+            <input id="tenantFromDate" type="date" class="form-control" formControlName="fromDate">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantToDate">To Date</label>
+            <input id="tenantToDate" type="date" class="form-control" formControlName="toDate">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="rentAgreement">Rent Agreement</label>
+            <input type="file" class="form-control" id="rentAgreement" (change)="onFileUpload($event, 'rentAgreement')">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="aadharCard">Aadhar Card</label>
+            <input type="file" class="form-control" id="aadharCard" (change)="onFileUpload($event, 'aadharCard')">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="policeVerification">Police Verification</label>
+            <input type="file" class="form-control" id="policeVerification"
+              (change)="onFileUpload($event, 'policeVerification')">
+          </div>
+
+          <div class="col-md-6 mb-3 d-flex align-items-center">
+            <input type="checkbox" class="form-check-input me-2" id="isActive" formControlName="isActive">
+            <label for="isActive" class="form-check-label">Is Active</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="save-btn" type="submit">Save</button>
+        <button class="cancel-btn" type="button" (click)="onCancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+
+  <div>
+    <h3>Resident List</h3>
+    <button class="btn btn-primary mb-3" *ngIf="!isAddingNew && isAdmin" (click)="onAddResident()">Add New
+      Resident</button>
+
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Search residents..." [(ngModel)]="searchTerm"
+        (input)="applySearch()">
+    </div>
+  </div>
+
+  <div class="table-responsive-scroll">
+    <table class="table table-bordered table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Flat Number</th>
+          <th>Name</th>
+          <th>Contact Number</th>
+          <th>Current Resident</th>
+          <th>Family Member</th>
+          <th>Car Parking</th>
+          <th>Maintenance Charges</th>
+          <th>Sale Deed</th>
+          <th *ngIf="isAdmin">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let resident of paginatedResidents">
+          <td>{{ resident.flatNumber }}</td>
+          <td>{{ resident.name }}</td>
+          <td>{{ resident.contactNumber }}</td>
+          <td>{{ resident.currentResident }}</td>
+          <td>{{resident.numberOfFamilyMembers}}</td>
+          <td>{{resident.carParking}}</td>
+          <td>{{resident.maintenanceCharges}}</td>
+
+          <td>
+            <ng-container>
+              <button *ngIf="resident.userId && resident.saleDeedDocName"
+                class="btn btn-info btn-sm d-flex align-items-center gap-1"
+                (click)="downloadSaleDeed(resident.userId, resident.saleDeedDocName)" title="Download Sale Deed">
+                <i class="fas fa-download"></i> Download
+              </button>
+              <span *ngIf="!resident.saleDeedDocName && resident.currentResident === 'Owner'">No document</span>
+            </ng-container>
+          </td>
+
+
+          <td *ngIf="isAdmin">
+            <div class="d-flex flex-column gap-2">
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-primary" (click)="editResident(resident)" title="Edit">
+                  <i class="bi bi-pencil-square"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteResident(resident.userId)" title="Delete">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <nav *ngIf="filteredResidents.length > itemsPerPage">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="goToPage(1)">First</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" (click)="goToPage(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" *ngFor="let page of getPages()" [class.active]="currentPage === page">
+          <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="goToPage(currentPage + 1)">Next</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" (click)="goToPage(totalPages)">Last</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="mt-5">
+    <h3>Tenant List</h3>
+    <button class="btn btn-primary mb-3" *ngIf="isAdmin" (click)="onAddTenant()">Add New Tenant</button>
+    <div *ngIf="isAddingNewTenant && isAdmin">
+      <h3 class="mb-4">Add New Tenant</h3>
+      <form [formGroup]="tenantForm" (ngSubmit)="onSaveTenant($event)" novalidate>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="tenantFlatNumber">Flat Number</label>
+            <select id="tenantFlatNumber" class="form-control" formControlName="flatNumber" required>
+              <option value="" disabled selected>Select a flat</option>
+              <option *ngFor="let flat of allAvailableFlatNumbers" [value]="flat">{{ flat }}</option>
+            </select>
+            <div *ngIf="tenantForm.get('flatNumber')?.invalid && tenantForm.get('flatNumber')?.touched"
+              class="text-danger">
+              Flat Number is required.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantName">Tenant Name</label>
+            <input id="tenantName" type="text" class="form-control" formControlName="tenantName">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantContactNumber">Tenant Contact Number</label>
+            <input id="tenantContactNumber" type="text" class="form-control" formControlName="tenantContactNumber">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantAlternateContactNumber">Tenant Alternate Contact Number</label>
+            <input id="tenantAlternateContactNumber" type="text" class="form-control"
+              formControlName="tenantAlternateContactNumber">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantFromDate">From Date</label>
+            <input id="tenantFromDate" type="date" class="form-control" formControlName="fromDate">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="tenantToDate">To Date</label>
+            <input id="tenantToDate" type="date" class="form-control" formControlName="toDate">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="rentAgreement">Rent Agreement</label>
+            <input type="file" class="form-control" id="rentAgreement" (change)="onFileUpload($event, 'rentAgreement')">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="aadharCard">Aadhar Card</label>
+            <input type="file" class="form-control" id="aadharCard" (change)="onFileUpload($event, 'aadharCard')">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="policeVerification">Police Verification</label>
+            <input type="file" class="form-control" id="policeVerification"
+              (change)="onFileUpload($event, 'policeVerification')">
+          </div>
+
+          <div class="col-md-6 mb-3 d-flex align-items-center">
+            <input type="checkbox" class="form-check-input me-2" id="isActive" formControlName="isActive">
+            <label for="isActive" class="form-check-label">Is Active</label>
+          </div>
+        </div>
+
+        <div class="button-group">
+          <button class="save-btn" type="submit">Save Tenant</button>
+          <button class="cancel-btn" type="button" (click)="onCancelTenant()">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mb-3 mt-4">
+      <input type="text" class="form-control" placeholder="Search tenants..." [(ngModel)]="tenantSearchTerm"
+        (input)="applyTenantSearch()">
+    </div>
+
+    <div class="table-responsive-scroll">
+      <table class="table table-bordered table-striped mt-3">
+        <thead>
+          <tr>
+            <th>Flat Number</th>
+            <th>Tenant Name</th>
+            <th>Owner Name</th>
+            <th>Tenant Contact</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Rent Agreement</th>
+            <th>Aadhar Card</th>
+            <th>Police Verification</th>
+            <th *ngIf="isAdmin">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tenant of paginatedTenants">
+            <!-- <td (click)="openFlatNumbersModal()" style="cursor: pointer; text-decoration: underline; color: blue;"> -->
+            <td>
+              {{ tenant.flatNumber }}
+            </td>
+            <td>{{ tenant.tenantName }}</td>
+            <td>{{ tenant.ownerName}}</td>
+            <td>{{ tenant.tenantContactNumber }}</td>
+            <td>{{ tenant.fromDate | date: 'dd-MM-yyyy' }}</td>
+            <td>{{ tenant.toDate | date: 'dd-MM-yyyy' }}</td>
+            <td>
+              <ng-container *ngIf="tenant.rentAgreementName">
+                <button type="button" class="btn btn-sm btn-primary"
+                  (click)="downloadTenantDocument(tenant.id, 'rent', tenant.rentAgreementName)"
+                  title="Download Rent Agreement">
+                  <i class="bi bi-download"></i> Rent
+                </button>
+              </ng-container>
+              <ng-container *ngIf="!tenant.rentAgreementName">
+                <span>No Doc</span>
+              </ng-container>
+            </td>
+
+            <td>
+              <ng-container *ngIf="tenant.aadharCardName">
+                <button type="button" class="btn btn-sm btn-success"
+                  (click)="downloadTenantDocument(tenant.id, 'aadhar', tenant.aadharCardName)"
+                  title="Download Aadhar Card">
+                  <i class="bi bi-download"></i> Aadhar
+                </button>
+              </ng-container>
+              <ng-container *ngIf="!tenant.aadharCardName">
+                <span>No Doc</span>
+              </ng-container>
+            </td>
+
+            <td>
+              <ng-container *ngIf="tenant.policeVerificationName">
+                <button type="button" class="btn btn-sm btn-warning"
+                  (click)="downloadTenantDocument(tenant.id, 'police', tenant.policeVerificationName)"
+                  title="Download Police Verification">
+                  <i class="bi bi-download"></i> Police
+                </button>
+              </ng-container>
+              <ng-container *ngIf="!tenant.policeVerificationName">
+                <span>No Doc</span>
+              </ng-container>
+            </td>
+
+            <td *ngIf="isAdmin">
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteTenant(tenant.id, tenant.owner_id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav *ngIf="filteredTenants.length > tenantItemsPerPage">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="tenantCurrentPage === 1">
+          <a class="page-link" (click)="goToTenantPage(1)">First</a>
+        </li>
+        <li class="page-item" [class.disabled]="tenantCurrentPage === 1">
+          <a class="page-link" (click)="goToTenantPage(tenantCurrentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" *ngFor="let page of getTenantPages()" [class.active]="tenantCurrentPage === page">
+          <a class="page-link" (click)="goToTenantPage(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="tenantCurrentPage === tenantTotalPages">
+          <a class="page-link" (click)="goToTenantPage(tenantCurrentPage + 1)">Next</a>
+        </li>
+        <li class="page-item" [class.disabled]="tenantCurrentPage === tenantTotalPages">
+          <a class="page-link" (click)="goToTenantPage(tenantTotalPages)">Last</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div *ngIf="showFlatNumbersModal" class="modal-overlay">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">All Available Flat Numbers</h5>
+        <button type="button" class="close" (click)="closeFlatNumbersModal()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul *ngIf="allAvailableFlatNumbers.length > 0; else noFlats">
+          <li *ngFor="let flat of allAvailableFlatNumbers">{{ flat }}</li>
+        </ul>
+        <ng-template #noFlats>
+          <p>No flat numbers available.</p>
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeFlatNumbersModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

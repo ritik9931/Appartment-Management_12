@@ -1,0 +1,136 @@
+/* Container adjustments */
+.container {
+  max-width: 100%;
+  padding: 1rem;
+}
+
+/* Card styling */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Headings */
+h2, h4 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Form styling */
+form .form-label {
+  font-weight: 500;
+}
+
+form .btn-group .btn {
+  min-width: auto;
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+/* Filters section */
+.table-responsive {
+  overflow: auto;
+  max-height: 400px; /* vertical scroll */
+  position: relative;
+}
+
+/* Table styling */
+.table th, .table td {
+  vertical-align: middle;
+  white-space: nowrap;
+  transition: background 0.3s;
+}
+
+/* Sticky table header */
+.table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #f8f9fa;
+  z-index: 10;
+  box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1), 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Sticky footer (total row) */
+.table tfoot tr {
+  position: sticky;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 9;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.1), 0 -2px 5px rgba(0,0,0,0.05);
+}
+
+/* Table hover effects */
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+/* Badge styling */
+.badge {
+  font-size: 0.85rem;
+  padding: 0.4em 0.65em;
+}
+
+/* Buttons */
+.btn-outline-success, .btn-outline-danger, .btn-outline-secondary {
+  transition: all 0.3s ease;
+}
+
+.btn-outline-success:hover {
+  background-color: #198754;
+  color: #fff;
+  border-color: #198754;
+}
+
+.btn-outline-danger:hover {
+  background-color: #dc3545;
+  color: #fff;
+  border-color: #dc3545;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #6c757d;
+  color: #fff;
+  border-color: #6c757d;
+}
+
+/* Responsive tweaks */
+@media (max-width: 992px) {
+  .col-md-5, .col-md-2, .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .d-flex.align-items-end {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .btn-group {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  table th, table td {
+    font-size: 0.85rem;
+  }
+}
+
+/* Mobile view adjustments */
+@media (max-width: 576px) {
+  h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .table-responsive {
+    font-size: 0.8rem;
+  }
+
+  .table thead th, .table tfoot tr {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  }
+}

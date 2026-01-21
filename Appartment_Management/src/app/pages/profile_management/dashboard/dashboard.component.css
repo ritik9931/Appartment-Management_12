@@ -1,0 +1,376 @@
+/* General Dashboard Styles */
+.dashboard-container {
+  background-color: #f4f6f8; /* Lighter background */
+  min-height: calc(100vh - 60px);
+  padding: 25px;
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.dashboard-title {
+  color: #2e435e; /* Darker, professional blue */
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #d1d8e2; /* Slightly more prominent border */
+  padding-bottom: 15px;
+}
+
+/* ========== Dashboard Grid for Cards ========== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Slightly wider min-width */
+  gap: 20px; /* Adjusted gap */
+  justify-content: center;
+  align-items: start;
+}
+
+/* Dashboard Cards - General Styling */
+.dashboard-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06); /* Softer shadow */
+  border: 1px solid #e0e6ed;
+  transition: all 0.3s ease-in-out;
+  cursor: default;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px); /* Less aggressive lift */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Softer hover shadow */
+}
+
+.dashboard-card .card-body {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dashboard-card .card-title {
+  color: #5a6e89; /* Muted blue-grey */
+  font-weight: 600;
+  font-size: 1.1rem; /* Slightly larger title */
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dashboard-card .card-text {
+  font-size: 2.5rem;
+  font-weight: 700; /* Less heavy bold */
+  line-height: 1.2;
+  /* color set by specific card classes */
+  flex-grow: 1;
+}
+
+/* Specific Card Colors and Backgrounds */
+.resident-card {
+  background-color: #eaf4ff; /* Very light blue background */
+  border-left: 5px solid #66aaff; /* Light blue accent */
+}
+.resident-card .dashboard-icon {
+  font-size: 2.2rem;
+  color: #66aaff;
+  opacity: 0.9;
+}
+.resident-card .card-text {
+  color: #3385ff; /* Slightly darker blue for contrast on light background */
+}
+
+.owners-card {
+  background-color: #fff8e1; /* Very light yellow background */
+  border-left: 5px solid #ffbb33; /* Golden yellow accent */
+}
+.owners-card .dashboard-icon {
+  font-size: 2.2rem;
+  color: #ffbb33;
+  opacity: 0.9;
+}
+.owners-card .card-text {
+  color: #e6a000; /* Darker orange-yellow for contrast */
+}
+
+.tenants-card {
+  background-color: #e8f5e9; /* Very light green background */
+  border-left: 5px solid #00c853; /* Emerald green accent */
+}
+.tenants-card .dashboard-icon {
+  font-size: 2.2rem;
+  color: #00c853;
+  opacity: 0.9;
+}
+.tenants-card .card-text {
+  color: #009944; /* Darker green for contrast */
+}
+
+/* Dues Card (if you decide to add a dues card later) */
+.dues-card {
+  background-color: #ffebee; /* Very light red background */
+  border-left: 5px solid #dc3545; /* Red accent */
+}
+.dues-card .dashboard-icon {
+  font-size: 2.2rem;
+  color: #dc3545;
+  opacity: 0.9;
+}
+.dues-card .card-text {
+  color: #dc3545;
+}
+
+
+.dashboard-card .card-subtitle {
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #777;
+}
+
+.dashboard-card .badge {
+  padding: 0.4em 0.7em;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.dashboard-card .card-footer {
+  background-color: rgba(249, 249, 249, 0.7); /* Slightly transparent for integrated look */
+  border-top: 1px solid #e0e6ed;
+  padding: 12px 20px;
+  border-radius: 0 0 12px 12px;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+/* Maintenance Defaulters Section */
+.maintenance-defaulters-section {
+  border-radius: 12px;
+  background-color: #fff; /* Keep this section white */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e0e6ed;
+  overflow: hidden;
+  margin-top: 25px; /* Add some spacing */
+}
+
+.card-title-defaulters {
+  color: #2e435e;
+  font-weight: 700;
+  font-size: 1.7rem;
+}
+
+.maintenance-defaulters-section .card-header {
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #e0e6ed;
+  padding: 20px 25px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.maintenance-defaulters-section .card-header .form-control,
+.maintenance-defaulters-section .card-header .form-select {
+  border-radius: 8px;
+  border-color: #ced4da;
+  padding: 10px 14px; /* Slightly more padding */
+  font-size: 0.95rem;
+  min-width: 180px;
+}
+
+/* Table */
+.table-responsive {
+  border-radius: 0 0 12px 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table thead th {
+  background-color: #e9ecef; /* Light grey header */
+  color: #495057;
+  font-weight: 600;
+  vertical-align: middle;
+  padding: 15px 25px;
+  white-space: nowrap;
+  border-bottom: 2px solid #d1d8e2;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.table tbody td {
+  vertical-align: middle;
+  padding: 15px 25px;
+  border-bottom: 1px solid #f0f2f5;
+  color: #495057;
+  font-size: 0.9rem;
+}
+
+.table tbody td.text-nowrap {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Light grey for even rows */
+}
+
+.table tbody tr:hover {
+  background-color: #f0f0f0; /* Slightly darker on hover */
+}
+
+.table tbody td.text-danger.fw-bold {
+  color: #dc3545; /* Keep the red for outstanding amounts */
+}
+
+.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* No defaulters message */
+.no-defaulters-message {
+  text-align: center;
+  padding: 30px;
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .dashboard-card .card-text {
+    font-size: 2.2rem;
+  }
+  .dashboard-card .dashboard-icon {
+    font-size: 2rem;
+  }
+  .dashboard-container {
+    padding: 20px;
+  }
+  .dashboard-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+  .dashboard-grid {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .dashboard-card {
+    min-height: 140px;
+    margin-bottom: 20px;
+  }
+  .dashboard-card .card-text {
+    font-size: 2rem;
+  }
+  .dashboard-card .dashboard-icon {
+    font-size: 1.8rem;
+  }
+  .dashboard-card .card-body {
+    padding: 18px;
+  }
+  .dashboard-card .card-title {
+    font-size: 1rem;
+    gap: 6px;
+  }
+  .maintenance-defaulters-section .card-header .form-control,
+  .maintenance-defaulters-section .card-header .form-select {
+    min-width: 160px;
+    font-size: 0.9rem;
+  }
+  .table thead th,
+  .table tbody td {
+    padding: 12px 18px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-container {
+    padding: 15px;
+  }
+  .dashboard-title {
+    font-size: 1.6rem;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  .maintenance-defaulters-section .card-header {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px;
+    gap: 10px;
+  }
+  .maintenance-defaulters-section .card-header .form-control,
+  .maintenance-defaulters-section .card-header .form-select,
+  .maintenance-defaulters-section .card-header .btn {
+    width: 100%;
+    min-width: unset;
+    font-size: 0.9rem;
+  }
+  .table thead th,
+  .table tbody td {
+    padding: 10px 15px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .dashboard-title {
+    font-size: 1.4rem;
+  }
+  .dashboard-card .card-text {
+    font-size: 2rem;
+  }
+  .dashboard-card .dashboard-icon {
+    font-size: 1.8rem;
+  }
+  .dashboard-card .card-title {
+    font-size: 0.9rem;
+  }
+  .dashboard-card .card-body {
+    padding: 15px;
+  }
+  .dashboard-card .card-footer {
+    font-size: 0.85rem;
+    padding: 12px 15px;
+  }
+  .card-title-defaulters {
+    font-size: 1.3rem;
+  }
+}
+
+/* User Type Badges */
+.user-type-badge {
+  padding: 0.3em 0.7em;
+  border-radius: 12px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 0.85rem;
+  display: inline-block;
+  text-align: center;
+  min-width: 70px;
+}
+
+/* Resident Type Badges - Consistent Coloring */
+.owner-badge {
+  background-color: #1e88e5; /* A nice blue */
+}
+
+.tenant-badge {
+  background-color: #43a047; /* A vibrant green */
+}
+
+/* User Type Badges - Distinct Colors */
+.Admin-badge {
+  background-color: #d84315; /* Orange-red for admin */
+}
+
+.User-badge {
+  background-color: #f9a825; /* Yellow-orange for user */
+}

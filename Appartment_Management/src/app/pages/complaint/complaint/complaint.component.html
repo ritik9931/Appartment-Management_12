@@ -1,0 +1,202 @@
+<div class="container mt-4 p-4 shadow rounded bg-white complaint-form-container">
+  <h2 class="mb-4 text-primary fw-bold d-flex align-items-center justify-content-between">
+    <span><i class="bi bi-exclamation-diamond-fill me-2"></i> Complaints</span>
+    <button class="btn btn-outline-primary" (click)="toggleForm()">
+      <i class="bi bi-plus-circle me-1"></i> {{ showForm ? 'Close' : 'Raise Complaint' }}
+    </button>
+  </h2>
+
+  <!-- Complaint Form -->
+  <div *ngIf="showForm" class="mb-4">
+    <form [formGroup]="complaintForm" (ngSubmit)="submitComplaint()">
+      <div class="row g-3">
+        <!-- Complaint Type -->
+        <div class="col-md-6">
+          <label for="type" class="form-label fw-semibold">Complaint Type</label>
+          <select id="type" class="form-select" formControlName="type">
+            <option value="" disabled>Select a type</option>
+            <option *ngFor="let type of complaintTypes" [value]="type">{{ type }}</option>
+          </select>
+          <div class="text-danger small"
+            *ngIf="complaintForm.get('type')?.touched && complaintForm.get('type')?.invalid">
+            Complaint type is required.
+          </div>
+        </div>
+
+        <!-- User ID -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">User ID</label>
+          <input type="text" class="form-control" [value]="userId" readonly />
+        </div>
+
+        <!-- Description -->
+        <div class="col-12">
+          <label for="description" class="form-label fw-semibold">Description</label>
+          <textarea id="description" rows="4" class="form-control" formControlName="description"
+            placeholder="Describe the issue..."></textarea>
+          <div class="text-danger small"
+            *ngIf="complaintForm.get('description')?.touched && complaintForm.get('description')?.invalid">
+            <div *ngIf="complaintForm.get('description')?.errors?.['required']">Description is required.</div>
+            <div *ngIf="complaintForm.get('description')?.errors?.['minlength']">Minimum 10 characters required.</div>
+          </div>
+        </div>
+
+        <!-- Upload Photos -->
+        <div class="col-md-6">
+          <label for="photo" class="form-label fw-semibold">Upload Photos (optional)</label>
+          <input type="file" id="photo" class="form-control" (change)="onFileSelected($event)" accept="image/*" />
+        </div>
+
+        <!-- Date of Submission -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Date of Submission</label>
+          <input type="text" class="form-control" [value]="today" disabled />
+        </div>
+
+        <!-- Status (Read-only display) -->
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Status</label>
+          <input type="text" class="form-control" value="Open" readonly />
+        </div>
+
+        <!-- Preview -->
+        <div class="col-12" *ngIf="imagePreview">
+          <label class="form-label fw-semibold">Preview:</label>
+          <div class="border p-2 rounded">
+            <img [src]="imagePreview" class="img-fluid rounded" style="max-height: 200px;" />
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="col-12 text-end">
+          <button class="btn btn-primary px-4 py-2 mt-3" type="submit" [disabled]="complaintForm.invalid">
+            <i class="bi bi-send-fill me-1"></i> Submit Complaint
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Filters -->
+  <div class="row g-2 mb-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" [(ngModel)]="searchText"
+        placeholder="Search by complaint type or user ID" />
+    </div>
+  </div>
+
+  <!-- Complaints Table -->
+  <div class="table-responsive complaints-table-container" style="max-height: 400px; overflow-y: auto;">
+    <table class="table table-striped align-middle text-center">
+      <thead class="table-primary sticky-top">
+        <tr>
+          <th>#</th>
+          <th>Complaint Type</th>
+          <th>User ID</th>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Proof Image</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let complaint of filteredComplaints(); let i = index">
+          <td>{{ (page - 1) * pageSize + i + 1 }}</td>
+          <td>{{ complaint.comp_type }}</td>
+          <td>{{ complaint.user_id }}</td>
+          <td>
+            {{ complaint.desc | slice: 0:50 }}{{ complaint.desc.length > 50 ? '...' : '' }}
+          </td>
+          <td>{{ complaint.created_at | date: 'yyyy-MM-dd' }}</td>
+          <td>
+<button
+  *ngIf="complaint.id && complaint.proof_image_name"
+  class="btn btn-sm btn-outline-secondary"
+  (click)="downloadProofImage(complaint.id, complaint.proof_image_name)">
+  <i class="bi bi-download"></i> Download
+</button>
+
+          </td>
+
+          <td>
+            <span [ngClass]="{
+              'badge bg-warning': complaint.comp_status === 'Open',
+              'badge bg-info': complaint.comp_status === 'In Progress',
+              'badge bg-success': complaint.comp_status === 'Resolved',
+              'badge bg-secondary': complaint.comp_status === 'Closed'
+            }">
+              {{ complaint.comp_status }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="openComplaintModal(complaint)">
+              <i class="bi bi-eye-fill"></i>
+            </button>
+            <button *ngIf="isAdmin" class="btn btn-sm btn-danger" (click)="deleteComplaint(complaint)">
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center mt-3">
+    <nav>
+      <ul class="pagination pagination-sm">
+        <li class="page-item" [class.disabled]="page === 1">
+          <button class="page-link" (click)="page = page - 1" [disabled]="page === 1">Previous</button>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">Page {{ page }}</span>
+        </li>
+        <li class="page-item" [class.disabled]="(page * pageSize) >= filteredComplaints(true).length">
+          <button class="page-link" (click)="page = page + 1"
+            [disabled]="(page * pageSize) >= filteredComplaints(true).length">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div *ngIf="showToast" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+  <div class="toast show align-items-center text-white bg-success border-0">
+    <div class="d-flex">
+      <div class="toast-body">{{ toastMessage }}</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" (click)="showToast = false"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Complaint Detail Modal -->
+<div class="modal fade" id="complaintModal" tabindex="-1" aria-labelledby="complaintModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="complaintModalLabel">Complaint Details</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedComplaint">
+        <p><strong>Type:</strong> {{ selectedComplaint.comp_type }}</p>
+        <p><strong>User ID:</strong> {{ selectedComplaint.user_id }}</p>
+        <p><strong>Description:</strong></p>
+        <p class="border rounded p-2" style="white-space: pre-line;">
+          {{ selectedComplaint.desc }}
+        </p>
+        <p><strong>Date:</strong> {{ selectedComplaint.created_at | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Status:</strong> {{ selectedComplaint.comp_status }}</p>
+        <p *ngIf="selectedComplaint.close_on">
+          <strong>Closed On:</strong> {{ selectedComplaint.close_on | date: 'yyyy-MM-dd' }}
+        </p>
+        <div *ngIf="selectedComplaint.proof_image">
+          <p><strong>Photo:</strong></p>
+          <img [src]="selectedComplaint.proof_image" alt="Uploaded Photo" class="img-fluid rounded border"
+            style="max-height: 300px;" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

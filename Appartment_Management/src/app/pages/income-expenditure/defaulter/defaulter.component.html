@@ -1,0 +1,44 @@
+<div *ngIf="loading" class="loading">Loading...</div>
+<div *ngIf="error" class="error">{{ error }}</div>
+
+<div class="mb-3">
+  <button (click)="exportToExcel()" class="btn btn-success me-2">
+    <i class="bi bi-file-earmark-excel"></i> Excel
+  </button>
+
+  <button (click)="exportToPDF()" class="btn btn-danger">
+    <i class="bi bi-file-earmark-pdf"></i> PDF
+  </button>
+</div>
+
+
+<table *ngIf="!loading && defaultersGrouped.length > 0" class="cool-table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Owner Name</th>
+      <th>Missing Months</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of defaultersGrouped" class="main-row">
+      <td>👤 {{ d.user_id }}</td>
+      <td>{{ d.owner_name }}</td>
+      <td>
+        <div class="dropdown" (click)="toggleUser(d.user_id)">
+          <span class="dropdown-label">
+            {{ expandedUser === d.user_id ? 'Hide' : 'Show' }} Months
+            <span class="arrow" [class.rotate]="expandedUser === d.user_id">▼</span>
+          </span>
+          <ul *ngIf="expandedUser === d.user_id" class="dropdown-list">
+            <li *ngFor="let month of d.months">{{ month }}</li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div *ngIf="!loading && defaultersGrouped.length === 0" class="no-data">
+  No defaulters found.
+</div>

@@ -1,0 +1,151 @@
+<!-- Toast container -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+  <div
+    class="toast align-items-center text-bg-success border-0"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    [class.show]="showToast"
+    [class.hide]="!showToast"
+    style="opacity: 1; transition: opacity 0.5s ease-in-out;"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        {{ toastMessage }}
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="hideToast()"></button>
+    </div>
+  </div>
+</div>
+<div class="container my-4">
+    <h2 class="text-success mb-3 animate__animated animate__fadeInDown">
+        <i class="bi bi-clipboard-check me-2"></i>Meeting Outcome Tracker
+    </h2>
+
+    <div *ngIf="isAdmin">
+        <button class="btn btn-outline-success mb-3" (click)="toggleForm()">
+            <i class="bi" [ngClass]="showOutcomeForm ? 'bi-x-circle' : 'bi-plus-circle'"></i>
+            {{ showOutcomeForm ? 'Cancel' : 'Add New Meeting Outcome' }}
+        </button>
+
+        <form *ngIf="showOutcomeForm" [formGroup]="outcomeForm" (ngSubmit)="onSubmit()"
+            class="animate__animated animate__fadeIn">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Meeting ID</label>
+                    <select formControlName="meeting_id" class="form-select" required>
+  <option value="" disabled selected>Select Meeting</option>
+  <option *ngFor="let meeting of meetings()" [value]="meeting.id">
+    {{ meeting.title }}
+  </option>
+</select>
+
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Agenda Item</label>
+                    <input formControlName="agenda_item" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Decision Taken</label>
+                    <textarea formControlName="decision_taken" class="form-control" rows="3"
+                        style="overflow:hidden; resize:none" (input)="autoGrowTextArea($event)">
+  </textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Action Required</label>
+                    <input formControlName="action_required" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Responsible Person</label>
+                    <input formControlName="responsible_person" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Deadline</label>
+                    <input type="date" formControlName="deadline" class="form-control" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Remarks</label>
+                    <textarea formControlName="remarks" rows="2" class="form-control"
+                        style="overflow:hidden; resize:none" (input)="autoGrowTextArea($event)">
+  </textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Upload Outcome File</label>
+                    <input type="file" (change)="onFileSelected($event)" class="form-control" />
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Submit</button>
+        </form>
+
+        <hr class="my-4" />
+    </div>
+
+    <!-- Search -->
+    <input type="text" class="form-control" [value]="searchTerm()" (input)="searchTerm.set($any($event.target).value)"
+        placeholder="Search..." />
+
+    <!-- Table -->
+    <div class="table-responsive animate__animated animate__fadeInUp">
+        <table class="table table-bordered table-hover table-striped">
+            <thead class="table-success">
+                <tr>
+                    <th>Meeting ID</th>
+                    <th>Agenda Item</th>
+                    <th>Decision</th>
+                    <th>Action</th>
+                    <th>Responsible</th>
+                    <th>Deadline</th>
+                    <th>Remarks</th>
+                    <th>Outcome File</th>
+                    <th *ngIf="isAdmin">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of paginatedItems">
+                    <td>{{  item.title }}</td>
+                    <td>{{ item.agenda_item }}</td>
+                    <td>{{ item.decision_taken }}</td>
+                    <td>{{ item.action_required }}</td>
+                    <td>{{ item.responsible_person }}</td>
+                    <td>{{ item.deadline | date:'yyyy-MM-dd' }}</td>
+                    <td>{{ item.remarks }}</td>
+                    <td>
+                        <button *ngIf="item.outcome_file_name" class="btn btn-sm btn-info"
+                            (click)="downloadOutcomeFile(item.id, item.outcome_file_name)"
+                            title="Download Outcome File">
+                            <i class="bi bi-download"></i>
+                        </button>
+
+
+
+
+                    </td>
+                    <td *ngIf="isAdmin">
+                        <button class="btn btn-danger btn-sm" (click)="onDelete(item.id)" title="Delete">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav *ngIf="totalPages > 1" class="mt-3">
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage() === 1">
+                <button class="page-link" (click)="changePage(currentPage() - 1)">Previous</button>
+            </li>
+            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index"
+                [class.active]="currentPage() === i + 1">
+                <button class="page-link" (click)="changePage(i + 1)">{{ i + 1 }}</button>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage() === totalPages">
+                <button class="page-link" (click)="changePage(currentPage() + 1)">Next</button>
+            </li>
+        </ul>
+    </nav>
+</div>

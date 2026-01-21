@@ -1,0 +1,120 @@
+/* Container padding and base font */
+.container {
+  max-width: 100%;
+  /* margin: 0 auto; */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Heading */
+h2 {
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  background-color: white;
+}
+
+/* Cards */
+.card {
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Card titles */
+.card-title {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+/* Dashboard stat numbers */
+.card h4 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* List group items (vendors by type) */
+.list-group-item {
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  padding: 0.75rem 1.25rem;
+}
+
+.list-group-item:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+/* Badges style */
+.badge {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.45em 0.75em;
+  border-radius: 20px;
+}
+
+/* Recent vendors table */
+.table thead th {
+  font-weight: 700;
+  color: #444;
+  border-bottom: 2px solid #ddd;
+}
+
+.table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}
+
+/* Status badges */
+.badge.bg-success {
+  background-color: #28a745 !important;
+  color: white;
+}
+
+.badge.bg-secondary {
+  background-color: #6c757d !important;
+  color: white;
+}
+
+/* Section divider */
+.section-divider {
+  border-top: 2px solid #007bff;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.status-yes {
+  color: green;
+  font-weight: bold;
+}
+
+.status-no {
+  color: red;
+  font-weight: bold;
+}
+
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  .card h4 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Animate.css is included via import, so no need to add animations here */

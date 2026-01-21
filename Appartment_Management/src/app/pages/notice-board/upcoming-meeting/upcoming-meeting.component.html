@@ -1,0 +1,159 @@
+<div class="container">
+  <h2 class="section-title">All Events / Meetings</h2>
+
+  <!-- Admin Toggle Add Form Button -->
+  <div *ngIf="isAdmin" class="text-end mb-3">
+    <button class="toggle-form-btn" (click)="showForm = !showForm">
+      {{ showForm ? 'Cancel' : '➕ Add New Meeting' }}
+    </button>
+  </div>
+
+  <!-- Schedule Form (Toggle) -->
+  <div *ngIf="isAdmin && showForm" class="mb-5 post-meeting-section fade-in">
+    <h5>Schedule New Meeting</h5>
+    <form [formGroup]="meetingForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" novalidate>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="meetingDateTime" class="form-label">Date & Time</label>
+          <input type="datetime-local" class="form-control" id="meetingDateTime" formControlName="dateTime" />
+        </div>
+        <div class="col-md-6">
+          <label for="meetingTitle" class="form-label">Meeting Title</label>
+          <input type="text" class="form-control" id="meetingTitle" formControlName="title"
+            placeholder="Enter meeting title" />
+        </div>
+        <div class="col-md-6">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" class="form-control" id="location" formControlName="location" />
+        </div>
+        <div class="col-md-6">
+          <label for="notify" class="form-label d-block">Notify Residents?</label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="notify" formControlName="notifyResidents" />
+            <label class="form-check-label" for="notify">Yes</label>
+          </div>
+        </div>
+        <div class="col-12">
+          <label for="desc" class="form-label">Description</label>
+          <textarea class="form-control" rows="3" formControlName="desc"></textarea>
+        </div>
+        <div class="col-12">
+          <label for="meeting" class="form-label">Upload Meeting (PDF/PNG/JPG - optional)</label>
+          <input type="file" class="form-control" id="meeting" (change)="onMeetingFileChange($event)" />
+        </div>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-primary">Schedule</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Search Input -->
+  <div class="search-box mb-3">
+    <input type="text" class="form-control" placeholder="🔍 Search meetings..." [(ngModel)]="searchTerm"
+      (ngModelChange)="filterMeetings()" />
+  </div>
+
+  <!-- Meeting Table Section -->
+  <div class="meeting-table-wrapper fade-in" *ngIf="paginatedMeetings().length > 0">
+    <div class="table-responsive">
+      <table class="table table-bordered align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Date & Time</th>
+            <th>Title</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Meeting File</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let event of paginatedMeetings(); let i = index">
+            <td>{{ currentPage * itemsPerPage + i + 1 }}</td>
+            <td>
+              <ng-container *ngIf="event.dateTime as dt">
+                {{ dt | date: 'medium' }}
+              </ng-container>
+            </td>
+            <td>{{ event.title }}</td>
+            <td>{{ event.location }}</td>
+            <td>{{ event.desc | slice: 0:60 }}<span *ngIf="event.desc.length > 60">...</span></td>
+            <td>
+              <button *ngIf="event.meetingFileName" class="btn btn-sm btn-link"
+                (click)="downloadMeetingFile(event.id, event.meetingFileName)" title="Download Meeting File">
+                <i class="bi bi-download me-1"></i> Download
+              </button>
+              <span *ngIf="!event.meetingFileName" class="text-muted">—</span>
+            </td>
+            <td>
+              <div class="btn-group">
+                <!-- View -->
+                <button class="btn btn-sm btn-outline-primary" (click)="viewFullEvent(event)" title="View Meeting">
+                  <i class="bi bi-eye-fill me-1"></i>
+                </button>
+
+                <!-- Delete -->
+                <button *ngIf="isAdmin" class="btn btn-sm btn-danger" (click)="deleteEvent(event.id)"
+                  title="Delete Meeting">
+                  <i class="bi bi-trash-fill me-1"></i>
+                </button>
+
+                <!-- Archive -->
+                <!-- <button *ngIf="isAdmin" class="btn btn-sm btn-secondary" (click)="archiveEvent(event.id)"
+                  title="Archive Meeting">
+                  <i class="bi bi-archive-fill me-1"></i>
+                </button> -->
+              </div>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination text-center mt-3">
+      <button class="btn btn-outline-primary btn-sm me-2" (click)="prevPage()" [disabled]="currentPage === 0">«
+        Prev</button>
+      <button *ngFor="let page of totalPagesArray(); let i = index" class="btn btn-sm"
+        [class.btn-primary]="currentPage === i" [class.btn-outline-primary]="currentPage !== i" (click)="goToPage(i)">
+        {{ i + 1 }}
+      </button>
+      <button class="btn btn-outline-primary btn-sm ms-2" (click)="nextPage()"
+        [disabled]="currentPage === totalPages() - 1">
+        Next »</button>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="paginatedMeetings().length === 0" class="text-center text-muted mt-5">
+    <p>No meetings found.</p>
+  </div>
+</div>
+
+<!-- View Modal -->
+<div class="modal fade" id="viewEventModal" tabindex="-1" aria-labelledby="viewEventModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewEventModalLabel">{{ selectedEvent?.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          <small *ngIf="selectedEvent?.dateTime as dt">Date & Time: {{ dt | date: 'medium' }}</small>
+        </p>
+        <p><strong>Location:</strong> {{ selectedEvent?.location }}</p>
+        <p>{{ selectedEvent?.desc }}</p>
+        <div *ngIf="selectedEvent?.meetingUrl">
+          <strong>Meeting:</strong>
+          <a [href]="selectedEvent?.meetingUrl" target="_blank">
+            {{ selectedEvent?.meetingFileName || 'Download/View' }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
