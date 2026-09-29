@@ -52,7 +52,7 @@ export class ComplaintDashboardComponent implements OnInit {
       return;
     }
 
-    const url = `/rktapi/api/rkt/GetComplaints?user_id=${this.userId}`;
+    const url = `/rkt/api/rkt/GetComplaints?user_id=${this.userId}`;
     console.log('Fetching complaints from URL:', url);
 
     this.http.get<{ Data: Complaint[] }>(url).subscribe({

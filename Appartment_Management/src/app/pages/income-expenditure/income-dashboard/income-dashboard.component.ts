@@ -35,7 +35,7 @@ interface GetTransactionsApiResponse {
 })
 export class IncomeDashboardComponent implements OnInit {
 
-  private readonly API_GET_ALL_TRANSACTIONS_URL = '/rktapi/api/rkt/GetAllTransaction';
+  private readonly API_GET_ALL_TRANSACTIONS_URL = 'https://www.nomad.org.in/rkt/api/rkt/GetAllTransaction';
 
   allTransactions: Transaction[] = [];
   isLoading = true;

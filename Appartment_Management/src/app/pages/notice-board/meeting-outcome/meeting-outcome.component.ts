@@ -37,7 +37,7 @@ meetings = signal<any[]>([]);
   }
 
   fetchMeetings(): void {
-  this.http.get<any>('/rktapi/api/rkt/GetAllMeetings').subscribe({
+  this.http.get<any>('https://www.nomad.org.in/rkt/api/rkt/GetAllMeetings').subscribe({
     next: (res) => {
       const list = Array.isArray(res) ? res : res.Data || [];
       this.meetings.set(list);
@@ -68,7 +68,7 @@ meetings = signal<any[]>([]);
 
  onSubmit(): void {
   if (this.outcomeForm.valid) {
-    this.http.post('/rktapi/api/rkt/InsertMeetingOutcome', this.outcomeForm.value).subscribe({
+    this.http.post('https://www.nomad.org.in/rkt/api/rkt/InsertMeetingOutcome', this.outcomeForm.value).subscribe({
       next: () => {
         this.fetchMeetingOutcomes();
         this.outcomeForm.reset();
@@ -82,7 +82,7 @@ meetings = signal<any[]>([]);
 
 
   fetchMeetingOutcomes(): void {
-    this.http.get<any>('/rktapi/api/rkt/GetAllMeetingOutcome').subscribe({
+    this.http.get<any>('https://www.nomad.org.in/rkt/api/rkt/GetAllMeetingOutcome').subscribe({
       next: res => {
         // Expect res.data to be an array; fallback to empty array if missing
         const list = Array.isArray(res) ? res : res.Data || [];
@@ -112,7 +112,7 @@ meetings = signal<any[]>([]);
 
   onDelete(id: string): void {
     if (confirm('Are you sure you want to delete this entry?')) {
-      this.http.get(`/rktapi/api/rkt/DeleteMeetingOutcome?id=${id}`).subscribe({
+      this.http.get(`https://www.nomad.org.in/rkt/api/rkt/DeleteMeetingOutcome?id=${id}`).subscribe({
         next: () => {
           // Refresh list after deletion
           this.fetchMeetingOutcomes();
@@ -127,7 +127,7 @@ meetings = signal<any[]>([]);
 
 
   downloadOutcomeFile(id: number, fileName: string) {
-    this.http.get<any>(`/rktapi/api/rkt/GetMeetingOutcomeFile?id=${id}`).subscribe({
+    this.http.get<any>(`https://www.nomad.org.in/rkt/api/rkt/GetMeetingOutcomeFile?id=${id}`).subscribe({
       next: (res) => {
         console.log('File API response:', res);
 

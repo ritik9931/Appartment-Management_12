@@ -7,11 +7,23 @@ import { ComplaintLayoutComponent } from './layout/complaint-layout/complaint-la
 import { VendorInformationLayoutComponent } from './layout/vendor-information-layout/vendor-information-layout.component';
 
 export const routes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'sign-in',
+  //   pathMatch: 'full'
+  // },
   {
-    path: '',
-    redirectTo: 'sign-in',
-    pathMatch: 'full'
-  },
+  path: '',
+  loadComponent: () =>
+    import('./public/public-page/public-page.component')
+      .then(m => m.PublicPageComponent)
+},
+{
+  path: 'visitor',
+  loadComponent: () =>
+    import('./public/visitor-page/visitor-page.component')
+      .then(m => m.VisitorPageComponent)
+},
   {
     path: 'sign-in',
     loadComponent: () => import('./sign-in/sign-in.component').then(m => m.SignInComponent)

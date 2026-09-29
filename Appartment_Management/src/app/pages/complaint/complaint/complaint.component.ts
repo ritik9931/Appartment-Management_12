@@ -62,7 +62,7 @@ export class ComplaintComponent implements OnInit {
     if (!this.userId) return;
     this.loading = true;
 
-    this.http.get<any>(`/rktapi/api/rkt/GetComplaints?user_id=${this.userId}`).subscribe({
+    this.http.get<any>(`/rkt/api/rkt/GetComplaints?user_id=${this.userId}`).subscribe({
       next: (res) => {
         this.complaints = res?.Data || [];
         this.loading = false;
@@ -134,7 +134,7 @@ export class ComplaintComponent implements OnInit {
 
 
 
-    this.http.post('/rktapi/api/rkt/InsertComplaint', payload).subscribe({
+    this.http.post('/rkt/api/rkt/InsertComplaint', payload).subscribe({
       next: () => {
         this.showSuccessToast('Complaint submitted successfully!');
         this.complaintForm.reset();
@@ -168,7 +168,7 @@ export class ComplaintComponent implements OnInit {
   deleteComplaint(complaint: any): void {
     const confirmDelete = confirm('Are you sure you want to delete this complaint?');
     if (confirmDelete) {
-      const deleteUrl = `/rktapi/api/rkt/DeleteComplaint?id=${complaint.id}`;
+      const deleteUrl = `/rkt/api/rkt/DeleteComplaint?id=${complaint.id}`;
       console.log('Calling delete via GET:', deleteUrl); // Optional debug log
 
       this.http.get(deleteUrl).subscribe({
@@ -185,7 +185,7 @@ export class ComplaintComponent implements OnInit {
   }
 
   downloadProofImage(id: number, fallbackName: string = 'proof_image.png'): void {
-    const url = `/rktapi/api/rkt/GetComplaintImage?id=${id}`;
+    const url = `/rkt/api/rkt/GetComplaintImage?id=${id}`;
 
     this.http.get<any>(url).subscribe({
       next: (res) => {

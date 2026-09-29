@@ -61,9 +61,9 @@ export class UpcomingMeetingComponent implements OnInit {
   private nextId = 1;
   private selectedMeetingFile: File | null = null;
 
-  private insertMeetingApiUrl = '/rktapi/api/rkt/InsertMeeting';
-  private getAllMeetingsApiUrl = '/rktapi/api/rkt/GetAllMeetings';
-  private deleteMeetingApiUrl = '/rktapi/api/rkt/DeleteMeeting';
+  private insertMeetingApiUrl = 'https://www.nomad.org.in/rkt/api/rkt/InsertMeeting';
+  private getAllMeetingsApiUrl = 'https://www.nomad.org.in/rkt/api/rkt/GetAllMeetings';
+  private deleteMeetingApiUrl = 'https://www.nomad.org.in/rkt/api/rkt/DeleteMeeting';
 
   private isBrowser: boolean;
 
@@ -157,7 +157,7 @@ export class UpcomingMeetingComponent implements OnInit {
   }
 
   downloadMeetingFile(id: number, fileName: string): void {
-    const downloadUrl = `/rktapi/api/rkt/GetMeetingFile?id=${id}`;
+    const downloadUrl = `https://www.nomad.org.in/rkt/api/rkt/GetMeetingFile?id=${id}`;
 
     this.http.get<any>(downloadUrl).subscribe({
       next: (response) => {

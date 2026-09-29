@@ -28,6 +28,7 @@
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/assets/css/styles.css",
               "src/styles.css",
               "node_modules/datatables.net-dt/css/dataTables.dataTables.min.css"
@@ -43,12 +44,7 @@
               "src/assets/js/plugins/gmaps.min.js",
               "src/assets/js/pages/google-maps.js",
               "src/assets/js/pages/dashboard-main.js"
-            ],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {

@@ -31,7 +31,7 @@ export class VendorInformationDashboardComponent implements OnInit {
     types: new Map<string, number>()
   };
 
-  readonly API_URL = '/rktapi/api/rkt/GetAllVendors';
+  readonly API_URL = 'https://www.nomad.org.in/rkt/api/rkt/GetAllVendors';
 
   ngOnInit(): void {
     this.loadVendors();

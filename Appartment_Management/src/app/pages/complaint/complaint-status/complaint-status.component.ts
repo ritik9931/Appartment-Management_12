@@ -42,8 +42,8 @@ export class ComplaintStatusComponent implements OnInit {
     if (!this.isAdmin && !this.userId) return;
 
     const url = this.isAdmin
-      ? `/rktapi/api/rkt/GetComplaints`
-      : `/rktapi/api/rkt/GetComplaints?user_id=${this.userId}`;
+      ? `/rkt/api/rkt/GetComplaints`
+      : `/rkt/api/rkt/GetComplaints?user_id=${this.userId}`;
 
     this.http.get<any>(url).subscribe({
       next: (res) => {
@@ -82,7 +82,7 @@ export class ComplaintStatusComponent implements OnInit {
   }
 
   saveEdit(complaint: any) {
-    let url = `/rktapi/api/rkt/UpdateComplaint?id=${complaint.id}&comp_status=${complaint.comp_status}`;
+    let url = `/rkt/api/rkt/UpdateComplaint?id=${complaint.id}&comp_status=${complaint.comp_status}`;
 
     if (complaint.comp_status === 'Closed' || complaint.comp_status === 'Resolved') {
       // Use today's date for close_on

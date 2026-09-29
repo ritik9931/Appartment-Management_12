@@ -93,7 +93,7 @@ export class ProfileManagementComponent implements OnInit {
   isAdmin: boolean = false;
   isBrowser: boolean;
 
-  private residentBaseUrl = '/rktapi/api/rkt';
+  private residentBaseUrl = 'https://www.nomad.org.in/rkt/api/rkt';
 
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -176,7 +176,7 @@ export class ProfileManagementComponent implements OnInit {
       return;
     }
 
-    const apiUrl = `/rktapi/api/rkt/GetSaledeedByUserId?userId=${encodeURIComponent(userId)}`;
+    const apiUrl = `https://www.nomad.org.in/rkt/api/rkt/GetSaledeedByUserId?userId=${encodeURIComponent(userId)}`;
 
     this.http.get<{ message: string, status: number, Data: [{ sale_deed_doc: string, sale_deed_doc_name: string }] }>(apiUrl)
       .pipe(
@@ -257,7 +257,7 @@ export class ProfileManagementComponent implements OnInit {
 
 
 
-    const apiUrl = `/rktapi/api/rkt/DownloadTanentDocument?id=${encodeURIComponent(tenantId)}&docType=${docType}`;
+    const apiUrl = `https://www.nomad.org.in/rkt/api/rkt/DownloadTanentDocument?id=${encodeURIComponent(tenantId)}&docType=${docType}`;
 
      this.http.get(apiUrl, { responseType: 'blob' }) // Expect a binary Blob response
     .pipe(

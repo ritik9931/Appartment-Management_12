@@ -71,11 +71,11 @@ export class IncomeExpenditureComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  private readonly API_GET_RESIDENTS_URL = '/rktapi/api/rkt/GetAllUserProfile';
-  private readonly API_TRANSACTIONS_BASE_URL = '/rktapi/api/rkt/Transactions';  //sample api for update
-  private readonly API_INSERT_TRANSACTION_URL = '/rktapi/api/rkt/InsertTransaction';
-  private readonly API_GET_ALL_TRANSACTIONS_URL = '/rktapi/api/rkt/GetAllTransaction';
-  private readonly API_GET_CATEGORY_MASTER_URL = '/rktapi/api/rkt/GetTransactionCategoryMaster';
+  private readonly API_GET_RESIDENTS_URL = 'https://www.nomad.org.in/rkt/api/rkt/GetAllUserProfile';
+  private readonly API_TRANSACTIONS_BASE_URL = 'https://www.nomad.org.in/rkt/api/rkt/Transactions';  //sample api for update
+  private readonly API_INSERT_TRANSACTION_URL = 'https://www.nomad.org.in/rkt/api/rkt/InsertTransaction';
+  private readonly API_GET_ALL_TRANSACTIONS_URL = 'https://www.nomad.org.in/rkt/api/rkt/GetAllTransaction';
+  private readonly API_GET_CATEGORY_MASTER_URL = 'https://www.nomad.org.in/rkt/api/rkt/GetTransactionCategoryMaster';
 
   constructor(private fb: FormBuilder, private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -282,7 +282,7 @@ export class IncomeExpenditureComponent implements OnInit, OnDestroy {
       alert('Invalid transaction ID');
       return;
     }
-    this.http.get<any>(`/rktapi/api/rkt/GetTransactionDoc?id=${id}`).subscribe(
+    this.http.get<any>(`https://www.nomad.org.in/rkt/api/rkt/GetTransactionDoc?id=${id}`).subscribe(
       (response) => {
         const base64Data = response.Data[0]?.proof_doc;
         const fileName = response.Data[0]?.proof_doc_name;
@@ -562,7 +562,7 @@ if (formValue.category === 'Monthly Maintenance') {
 
   deleteTransaction(id: number): void {
     if (confirm('Are you sure you want to delete this transaction?')) {
-      this.http.get(`/rktapi/api/rkt/DeleteTransaction?id=${id}`).subscribe({
+      this.http.get(`https://www.nomad.org.in/rkt/api/rkt/DeleteTransaction?id=${id}`).subscribe({
         next: () => {
           alert('Transaction deleted successfully.');
           this.fetchTransactionRecords(); // Refresh list

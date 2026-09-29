@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
   searchTerm = '';
   filterUserType: '' | 'Owner' | 'Tenant' = '';
 
-  private residentBaseUrl = '/rktapi/api/rkt';
+  private residentBaseUrl = 'https://www.nomad.org.in/rkt/api/rkt';
 
   constructor(private router: Router, private http: HttpClient) {}
 

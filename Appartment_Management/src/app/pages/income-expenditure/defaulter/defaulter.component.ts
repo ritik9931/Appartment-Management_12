@@ -31,13 +31,13 @@ getDefaulters() {
   this.loading = true;
 
   // Get defaulters list
-  this.http.get<any>('/rktapi/api/rkt/GetDefaulterMaintenance').subscribe({
+  this.http.get<any>('https://www.nomad.org.in/rkt/api/rkt/GetDefaulterMaintenance').subscribe({
     next: (res) => {
       if (res.status === 200 && res.Data) {
         const groupedData = this.groupByUser(res.Data);
 
         // Now get owners list
-        this.http.get<any>('/rktapi/api/rkt/GetAllUserProfile').subscribe({
+        this.http.get<any>('https://www.nomad.org.in/rkt/api/rkt/GetAllUserProfile').subscribe({
           next: (ownerRes) => {
             if (ownerRes.status === 200 && ownerRes.Data && ownerRes.Data.owner) {
               const owners = ownerRes.Data.owner;

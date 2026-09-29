@@ -55,7 +55,7 @@ export class ApartmentCommitteeMemberComponent implements OnInit {
 
   userOptions: UserProfile[] = [];
 
-  // Define the base API URL using the environment variable
+  // Define the base API URL using the environment variable https://www.nomad.org.in
   private readonly BASE_API_URL = environment.apiUrl;
 
   // Define specific endpoints relative to the BASE_API_URL

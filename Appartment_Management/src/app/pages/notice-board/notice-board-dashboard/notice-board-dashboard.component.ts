@@ -73,14 +73,14 @@ export class NoticeBoardDashboardComponent implements OnInit {
   }
 
 loadNotices() {
-  this.http.get<ApiResponse<Notice>>('/rktapi/api/rkt/GetTopNotice').subscribe(response => {
+  this.http.get<ApiResponse<Notice>>('https://www.nomad.org.in/rkt/api/rkt/GetTopNotice').subscribe(response => {
     this.latestNotices = response?.Data
       ?.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()) || [];
   });
 }
 
 loadMeetings() {
-  this.http.get<ApiResponse<MeetingResponse>>('/rktapi/api/rkt/GetTopMeetings').subscribe(response => {
+  this.http.get<ApiResponse<MeetingResponse>>('/rkt/api/rkt/GetTopMeetings').subscribe(response => {
     const processedMeetings: MeetingDisplay[] = (response?.Data || []).map((meeting) => {
       const dateTime = new Date(meeting.m_date);
       return {
@@ -131,7 +131,7 @@ loadMeetings() {
   downloadNoticeAttachment(notice: Notice) {
     if (!notice?.id) return;
 
-    const apiUrl = `/rktapi/api/rkt/DownloadNotice?id=${notice.id}`;
+    const apiUrl = `https://www.nomad.org.in/rkt/api/rkt/DownloadNotice?id=${notice.id}`;
     this.http.get(apiUrl, { responseType: 'blob' }).subscribe({
       next: (blob) => {
         const blobUrl = window.URL.createObjectURL(blob);

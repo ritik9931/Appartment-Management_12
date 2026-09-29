@@ -41,7 +41,7 @@ export class SignInComponent implements OnDestroy {
       return;
     }
 
-    const apiUrl = `/rktapi/api/rkt/CheckUser?userid=${encodeURIComponent(emailTrimmed)}&password=${encodeURIComponent(passwordTrimmed)}`;
+    const apiUrl = `https://www.nomad.org.in/rkt/api/rkt/CheckUser?userid=${encodeURIComponent(emailTrimmed)}&password=${encodeURIComponent(passwordTrimmed)}`;
 
     this.http.get<any>(apiUrl).subscribe({
       next: (res) => {

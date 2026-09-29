@@ -1,0 +1,1946 @@
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- HEADER -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+
+    <a href="#home" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="38" height="38">
+          <path
+            d="M20 4 36 16v20H4V16Z"
+            fill="url(#g1)"
+          />
+          <path
+            d="M20 4 36 16v20H4V16Z"
+            fill="none"
+            stroke="rgba(255,255,255,.5)"
+            stroke-width="1"
+          />
+          <rect
+            x="15"
+            y="24"
+            width="10"
+            height="12"
+            fill="#fff"
+            opacity=".85"
+          />
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2563EB" />
+              <stop offset="1" stop-color="#06B6D4" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </span>
+
+      <span class="brand-text">
+        <strong>Radha Krishna Tower</strong>
+        <small>Estd. 1997 · Habsiguda</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <ul>
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#amenities" class="nav-link">Amenities</a></li>
+        <li><a href="#events" class="nav-link">Events</a></li>
+        <li><a href="#gallery" class="nav-link">Gallery</a></li>
+        <li><a href="#notices" class="nav-link">Notices</a></li>
+        <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a routerLink="/sign-in" class="btn btn-ghost">
+        Resident Login
+      </a>
+
+      <a href="#contact" class="btn btn-primary">
+        Join Community
+      </a>
+
+      <button
+  class="hamburger"
+  id="hamburger"
+  aria-label="Open menu"
+  [attr.aria-expanded]="drawerOpen"
+  aria-controls="mobileDrawer"
+  (click)="toggleDrawer()"
+>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<!-- MOBILE DRAWER -->
+<div
+  class="drawer"
+  id="mobileDrawer"
+  [class.open]="drawerOpen"
+  [attr.aria-hidden]="!drawerOpen"
+>
+  <div class="drawer-panel">
+
+    <button
+  class="drawer-close"
+  id="drawerClose"
+  aria-label="Close menu"
+  (click)="closeDrawer()"
+>
+      &times;
+    </button>
+
+    <ul class="drawer-nav">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#amenities">Amenities</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#notices">Notices</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="drawer-actions">
+      <a
+        routerLink="/sign-in"
+        class="btn btn-ghost full"
+      >
+        Resident Login
+      </a>
+
+      <a
+        href="#contact"
+        class="btn btn-primary full"
+      >
+        Join Community
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<div
+  class="drawer-backdrop"
+  id="drawerBackdrop"
+  [class.open]="drawerOpen"
+  (click)="closeDrawer()"
+></div>
+
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <div
+      class="hero-blob blob-1"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="hero-blob blob-2"
+      aria-hidden="true"
+    ></div>
+
+    <div class="container hero-grid">
+
+      <div class="hero-copy reveal">
+
+        <span class="badge">
+          🏛️ Established in 1997 · Habsiguda, Hyderabad
+        </span>
+
+        <h1>
+          A Well-Established Residential Community in Habsiguda
+        </h1>
+
+        <p class="hero-sub">
+          Located on Captain Veera Raja Reddy Marg, Radha Krishna Tower has been a cherished home for families for nearly three decades — offering peaceful residential living with NGRI Metro Station and daily essentials right at your doorstep.
+        </p>
+
+        <div class="hero-cta">
+
+          <a
+            href="#about"
+            class="btn btn-primary btn-lg"
+          >
+            Explore Community
+          </a>
+
+          <a
+            routerLink="/sign-in"
+            class="btn btn-outline btn-lg"
+          >
+            Resident Login
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-visual reveal">
+
+        <div class="hero-image">
+          <img
+            src="assets/images/appartment.jpeg"
+            alt="Radha Krishna Tower residential apartment on Captain Veera Raja Reddy Marg, Habsiguda"
+            loading="eager"
+          />
+        </div>
+
+        <div class="float-card card-a">
+          <span class="float-icon">🏛️</span>
+
+          <div>
+            <strong>1997</strong>
+            <small>Established Year</small>
+          </div>
+        </div>
+
+        <div class="float-card card-b">
+          <span class="float-icon">🚇</span>
+
+          <div>
+            <strong>NGRI Metro</strong>
+            <small>Walking Distance</small>
+          </div>
+        </div>
+
+        <div class="float-card card-c">
+          <span class="float-icon">🛡️</span>
+
+          <div>
+            <strong>24/7</strong>
+            <small>Gated Security</small>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+  <section
+    class="stats"
+    aria-label="Community statistics"
+  >
+
+    <div class="container stats-grid">
+
+      <div class="stat-card reveal">
+        <div class="stat-icon g-blue">🏛️</div>
+
+        <span class="stat-static">
+          1997
+        </span>
+
+        <p>Year Established</p>
+      </div>
+
+
+      <div class="stat-card reveal">
+        <div class="stat-icon g-violet">⏳</div>
+
+        <span
+          class="stat-num"
+          data-count="28"
+        >
+          0
+        </span>
+
+        <span class="stat-plus">+</span>
+
+        <p>Years of Heritage</p>
+      </div>
+
+
+      <div class="stat-card reveal">
+        <div class="stat-icon g-cyan">👨‍👩‍👧‍👦</div>
+
+        <span
+          class="stat-num"
+          data-count="100"
+        >
+          0
+        </span>
+
+        <span class="stat-plus">+</span>
+
+        <p>Residents &amp; Families</p>
+      </div>
+
+
+      <div class="stat-card reveal">
+        <div class="stat-icon g-amber">🚇</div>
+
+        <span class="stat-static">
+          NGRI
+        </span>
+
+        <p>Metro Station</p>
+      </div>
+
+
+      <div class="stat-card reveal">
+        <div class="stat-icon g-green">🛡️</div>
+
+        <span class="stat-static">24/7</span>
+
+        <p>Security &amp; Support</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+
+    <div class="container about-grid">
+
+      <div class="about-media reveal">
+
+        <img
+          class="about-img-main"
+          src="assets/images/appartment.jpeg"
+          alt="Radha Krishna Tower residential building on Captain Veera Raja Reddy Marg, Habsiguda"
+          loading="lazy"
+        />
+
+        <img
+          class="about-img-float"
+          src="assets/images/events/ganesh-puja.jpg"
+          alt="Community festival celebrations at Radha Krishna Tower"
+          loading="lazy"
+        />
+
+      </div>
+
+
+      <div class="about-copy reveal">
+
+        <span class="eyebrow-label">
+          A Building With History · Established in 1997
+        </span>
+
+        <h2>
+          A Building With History, A Community With Heart
+        </h2>
+
+        <p>
+          <strong>Radha Krishna Tower</strong> is a well-established residential apartment located on <strong>Captain Veera Raja Reddy Marg, Habsiguda, Hyderabad</strong>. Constructed in <strong>1997</strong>, the building has been a part of the Habsiguda community for nearly three decades and continues to provide a convenient residential location for its owners and families.
+        </p>
+
+        <p>
+          Constructed in 1997, Radha Krishna Tower has witnessed the growth and transformation of Habsiguda over the years. As the neighbourhood has developed, the surrounding infrastructure and availability of essential services have also expanded. Today, Radha Krishna Tower represents not only a residential building but also a community with a long history, established neighbourhood, and convenient urban location.
+        </p>
+
+        <ul class="feature-list">
+
+          <li>
+            <span class="check">✓</span>
+            Situated on Captain Veera Raja Reddy Marg, Habsiguda
+          </li>
+
+          <li>
+            <span class="check">✓</span>
+            Constructed in 1997 — nearly three decades of heritage
+          </li>
+
+          <li>
+            <span class="check">✓</span>
+            Walking distance to NGRI Metro Station for citywide transit
+          </li>
+
+          <li>
+            <span class="check">✓</span>
+            Surrounded by hospitals, pharmacies, supermarkets &amp; parks
+          </li>
+
+          <li>
+            <span class="check">✓</span>
+            Designed for everyday convenience for families &amp; seniors
+          </li>
+
+        </ul>
+
+        <a
+          href="#amenities"
+          class="btn btn-primary"
+        >
+          Explore Location &amp; Conveniences
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- AMENITIES -->
+  <section
+    class="amenities"
+    id="amenities"
+  >
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <span class="eyebrow-label">
+          Location &amp; Conveniences
+        </span>
+
+        <h2>
+          A Convenient &amp; Well-Connected Location
+        </h2>
+
+        <p class="section-sub">
+          One of the major advantages of Radha Krishna Tower is its prime Habsiguda location. Offering a harmonious blend of residential comfort, essential services, transportation, and connectivity — day-to-day life is convenient for families, senior citizens, and working professionals alike.
+        </p>
+
+      </div>
+
+
+      <div class="amenity-grid">
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-blue">🚇</div>
+          <h3>NGRI Metro Station</h3>
+          <p>
+            Proximity to NGRI Metro Station provides convenient access to Hyderabad's Metro network, connecting residents smoothly across the city.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-violet">🏥</div>
+          <h3>Hospitals &amp; Healthcare</h3>
+          <p>
+            Immediate access to reputed multi-specialty hospitals, clinics, and emergency medical facilities in and around Habsiguda.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-cyan">💊</div>
+          <h3>Medical Stores &amp; Pharmacies</h3>
+          <p>
+            24/7 pharmacies and medical stores located right within the immediate neighbourhood for round-the-clock healthcare support.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-amber">🛒</div>
+          <h3>Grocery Stores</h3>
+          <p>
+            Fresh vegetables, daily staples, and neighbourhood grocery shops situated within easy walking distance for everyday household needs.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-green">🏬</div>
+          <h3>Supermarkets &amp; Shopping</h3>
+          <p>
+            Modern supermarkets and retail shopping centres nearby, making routine household shopping quick, effortless, and accessible.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-blue">🌳</div>
+          <h3>Parks &amp; Green Spaces</h3>
+          <p>
+            Pleasant neighbourhood parks and open green spaces nearby, ideal for morning walks, elderly relaxation, and children's recreation.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-violet">🏦</div>
+          <h3>Banks &amp; Essential Services</h3>
+          <p>
+            Leading bank branches, ATMs, post offices, and essential civic utilities conveniently located in the immediate vicinity.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-cyan">🍽️</div>
+          <h3>Restaurants &amp; Dining</h3>
+          <p>
+            A vibrant selection of family restaurants, cafés, bakeries, and daily-use food establishments along the avenue.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-amber">🛣️</div>
+          <h3>Major Road Connectivity</h3>
+          <p>
+            Prime location on Captain Veera Raja Reddy Marg with smooth arterial connectivity to Habsiguda Main Road, Uppal, and Secunderabad.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-green">🛡️</div>
+          <h3>24/7 Gated Security</h3>
+          <p>
+            Round-the-clock trained security personnel, gated resident entry, and CCTV camera coverage ensuring complete peace of mind.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-blue">🚗</div>
+          <h3>Covered Resident Parking</h3>
+          <p>
+            Dedicated, organized vehicle parking spaces for residents and visiting guests ensuring hassle-free parking management.
+          </p>
+        </article>
+
+
+        <article class="amenity-card reveal">
+          <div class="amenity-icon g-violet">🔋</div>
+          <h3>Power Backup &amp; Water</h3>
+          <p>
+            Reliable power backup for essential common areas, elevators, and uninterrupted domestic water supply for all homes.
+          </p>
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- EVENTS -->
+  <section
+    class="events"
+    id="events"
+  >
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <span class="eyebrow-label">
+          Events
+        </span>
+
+        <h2>
+          What's Happening in Our Community
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <div class="event-scroller">
+
+      <article class="event-card reveal">
+
+        <div class="event-img">
+
+          <img
+            src="assets/images/events/ganesh-puja.jpg"
+            alt="Lord Ganesha idol decorated for Ganesh Puja"
+            style="object-position: center 25%;"
+            loading="lazy"
+          />
+
+          <span class="date-badge">
+            07
+            <small>SEP</small>
+          </span>
+
+        </div>
+
+        <div class="event-body">
+
+          <h3>Ganesh Puja</h3>
+
+          <p>
+            Grand Ganesh Puja celebration and Sthapana ceremony in our community.
+          </p>
+
+          <span class="event-meta">
+            📍 Community Hall · 🕘 9:30 AM
+          </span>
+
+          <a
+            href="#events"
+            class="link-cta"
+          >
+            View Details →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <article class="event-card reveal">
+
+        <div class="event-img">
+
+          <img
+            src="assets/images/events/ganesh-havan.jpg"
+            alt="Community Ganesh Puja Havan and Maha Aarti ceremony"
+            style="object-position: center center;"
+            loading="lazy"
+          />
+
+          <span class="date-badge">
+            08
+            <small>SEP</small>
+          </span>
+
+        </div>
+
+        <div class="event-body">
+
+          <h3>Ganesh Havan & Aarti</h3>
+
+          <p>
+            Sacred havan ceremony, community prayers, and maha aarti with residents.
+          </p>
+
+          <span class="event-meta">
+            📍 Apartment Premises · 🕙 10:00 AM
+          </span>
+
+          <a
+            href="#events"
+            class="link-cta"
+          >
+            View Details →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <article class="event-card reveal">
+
+        <div class="event-img">
+
+          <img
+            src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=500&q=80"
+            alt="Community festival with string lights and stalls"
+            loading="lazy"
+          />
+
+          <span class="date-badge">
+            02
+            <small>OCT</small>
+          </span>
+
+        </div>
+
+        <div class="event-body">
+
+          <h3>Community Festival</h3>
+
+          <p>
+            Food stalls, music and games for
+            every household.
+          </p>
+
+          <span class="event-meta">
+            📍 Community Hall · 🕕 6:00 PM
+          </span>
+
+          <a
+            href="#"
+            class="link-cta"
+          >
+            View Details →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <article class="event-card reveal">
+
+        <div class="event-img">
+
+          <img
+            src="https://images.unsplash.com/photo-1526676037777-05a232554f77?w=500&q=80"
+            alt="Children playing a sports day event"
+            loading="lazy"
+          />
+
+          <span class="date-badge">
+            10
+            <small>OCT</small>
+          </span>
+
+        </div>
+
+        <div class="event-body">
+
+          <h3>Kids Sports Day</h3>
+
+          <p>
+            Friendly races and games on the
+            play lawn.
+          </p>
+
+          <span class="event-meta">
+            📍 Play Area · 🕘 9:00 AM
+          </span>
+
+          <a
+            href="#"
+            class="link-cta"
+          >
+            View Details →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <article class="event-card reveal">
+
+        <div class="event-img">
+
+          <img
+            src="https://images.unsplash.com/photo-1605379399642-870262d3d051?w=500&q=80"
+            alt="Diwali lights and decorations in the courtyard"
+            loading="lazy"
+          />
+
+          <span class="date-badge">
+            01
+            <small>NOV</small>
+          </span>
+
+        </div>
+
+        <div class="event-body">
+
+          <h3>Diwali Celebration</h3>
+
+          <p>
+            Lights, sweets and a shared
+            courtyard celebration.
+          </p>
+
+          <span class="event-meta">
+            📍 Courtyard · 🕖 7:00 PM
+          </span>
+
+          <a
+            href="#"
+            class="link-cta"
+          >
+            View Details →
+          </a>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+<!-- GALLERY -->
+<section
+  class="gallery"
+  id="gallery"
+>
+
+  <div class="container">
+
+    <!-- Section Heading -->
+    <div class="section-head reveal">
+
+      <span class="eyebrow-label">
+        Gallery
+      </span>
+
+      <h2>
+        Life Inside Our Community
+      </h2>
+
+    </div>
+
+
+    <!-- Gallery Filters -->
+    <div
+      class="gallery-filters"
+      role="tablist"
+      aria-label="Gallery categories"
+    >
+
+      <!-- ALL -->
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="galleryFilter === 'all'"
+        (click)="setGalleryFilter('all')"
+        role="tab"
+        [attr.aria-selected]="galleryFilter === 'all'"
+      >
+        All
+      </button>
+
+
+      <!-- COMMUNITY -->
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="galleryFilter === 'community'"
+        (click)="setGalleryFilter('community')"
+        role="tab"
+        [attr.aria-selected]="galleryFilter === 'community'"
+      >
+        Community
+      </button>
+
+
+      <!-- AMENITIES -->
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="galleryFilter === 'amenities'"
+        (click)="setGalleryFilter('amenities')"
+        role="tab"
+        [attr.aria-selected]="galleryFilter === 'amenities'"
+      >
+        Amenities
+      </button>
+
+
+      <!-- EVENTS -->
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="galleryFilter === 'events'"
+        (click)="setGalleryFilter('events')"
+        role="tab"
+        [attr.aria-selected]="galleryFilter === 'events'"
+      >
+        Events
+      </button>
+
+
+      <!-- CELEBRATIONS -->
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="galleryFilter === 'celebrations'"
+        (click)="setGalleryFilter('celebrations')"
+        role="tab"
+        [attr.aria-selected]="galleryFilter === 'celebrations'"
+      >
+        Celebrations
+      </button>
+
+
+      <!-- FACILITIES -->
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="galleryFilter === 'facilities'"
+        (click)="setGalleryFilter('facilities')"
+        role="tab"
+        [attr.aria-selected]="galleryFilter === 'facilities'"
+      >
+        Facilities
+      </button>
+
+    </div>
+
+
+    <!-- Gallery Grid -->
+    <div
+      class="gallery-grid"
+      id="galleryGrid"
+    >
+
+
+      <!-- =====================================================
+           1. COMMUNITY
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="community"
+        style="--sp:1"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'community'
+        "
+        (click)="openLightbox(
+          'assets/images/appartment.jpeg',
+          'Radha Krishna Tower - Residential apartment on Captain Veera Raja Reddy Marg'
+        )"
+      >
+
+        <img
+          src="assets/images/appartment.jpeg"
+          alt="Radha Krishna Tower residential apartment on Captain Veera Raja Reddy Marg"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+      <!-- =====================================================
+           2. AMENITIES - PARKS & GREENERY
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="amenities"
+        style="--sp:2"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'amenities'
+        "
+        (click)="openLightbox(
+          'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=1200&q=85',
+          'Neighbourhood parks & walking spaces in Habsiguda'
+        )"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1519331379826-f10be5486c6f?w=600&q=70"
+          alt="Neighbourhood parks & walking spaces in Habsiguda"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+      <!-- =====================================================
+           3. FACILITIES - FITNESS CENTER
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="facilities"
+        style="--sp:1"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'facilities'
+        "
+        (click)="openLightbox(
+          'https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=1200&q=85',
+          'Community fitness center'
+        )"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1571624436279-b272aff752b5?w=600&q=70"
+          alt="Community fitness center"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+      <!-- =====================================================
+           4. EVENTS
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="events"
+        style="--sp:2"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'events'
+        "
+        (click)="openLightbox(
+          'assets/images/events/ganesh-puja.jpg',
+          'Lord Ganesha Idol - Ganesh Puja celebration'
+        )"
+      >
+
+        <img
+          src="assets/images/events/ganesh-puja.jpg"
+          alt="Lord Ganesha Idol - Ganesh Puja celebration"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+      <!-- =====================================================
+           5. CELEBRATIONS
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="celebrations"
+        style="--sp:1"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'celebrations'
+        "
+        (click)="openLightbox(
+          'assets/images/events/ganesh-havan.jpg',
+          'Community Ganesh Puja Havan Ceremony'
+        )"
+      >
+
+        <img
+          src="assets/images/events/ganesh-havan.jpg"
+          alt="Community Ganesh Puja Havan Ceremony"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+      <!-- =====================================================
+           6. COMMUNITY - GARDEN
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="community"
+        style="--sp:2"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'community'
+        "
+        (click)="openLightbox(
+          'https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=1200&q=85',
+          'Landscaped garden pathway'
+        )"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600&q=70"
+          alt="Landscaped garden pathway"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+      <!-- =====================================================
+           7. FACILITIES - CLUBHOUSE
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="facilities"
+        style="--sp:1"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'facilities'
+        "
+        (click)="openLightbox(
+          'https://images.unsplash.com/photo-1560184897-ae75f418493e?w=1200&q=85',
+          'Clubhouse interior lounge'
+        )"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=600&q=70"
+          alt="Clubhouse interior lounge"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+      <!-- =====================================================
+           8. AMENITIES - CHILDREN PLAY AREA
+           ===================================================== -->
+
+      <figure
+        class="g-item"
+        data-cat="amenities"
+        style="--sp:1"
+        [class.hidden]="
+          galleryFilter !== 'all' &&
+          galleryFilter !== 'amenities'
+        "
+        (click)="openLightbox(
+          'https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=1200&q=85',
+          'Children play area'
+        )"
+      >
+
+        <img
+          src="https://images.unsplash.com/photo-1592280771190-3e2e4d571952?w=600&q=70"
+          alt="Children play area"
+          loading="lazy"
+        />
+
+        <span class="g-overlay">
+          🔍
+        </span>
+
+      </figure>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+  <!-- NOTICES -->
+  <section
+    class="notices"
+    id="notices"
+  >
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <span class="eyebrow-label">
+          Community Updates
+        </span>
+
+        <h2>
+          Notices &amp; Announcements
+        </h2>
+
+      </div>
+
+
+      <div class="notice-grid">
+
+        <!-- DYNAMIC NOTICES (from https://www.nomad.org.in/rkt/api/rkt/GetTopNotice) -->
+        <article *ngFor="let notice of notices" class="notice-card">
+
+          <span class="notice-tag tag-blue">
+            Notice
+          </span>
+
+          <time>
+            {{ notice.created_at | date:'longDate' }}
+          </time>
+
+          <h3>
+            {{ notice.title }}
+          </h3>
+
+          <p>
+            {{ notice.description }}
+          </p>
+
+          <div class="notice-meta" *ngIf="notice.created_by || notice.exp_date">
+            <span *ngIf="notice.created_by">
+              👤 {{ notice.created_by }}
+            </span>
+            <span *ngIf="notice.exp_date">
+              ⏳ Valid till: {{ notice.exp_date | date:'mediumDate' }}
+            </span>
+          </div>
+
+          <a href="javascript:void(0)" (click)="openNoticeModal(notice)" class="link-cta">
+            Read More →
+          </a>
+
+        </article>
+
+
+        <!-- DYNAMIC MEETINGS (from https://www.nomad.org.in/rkt/api/rkt/GetTopMeetings) -->
+        <article *ngFor="let meeting of meetings" class="notice-card">
+
+          <span class="notice-tag tag-violet">
+            Meeting
+          </span>
+
+          <time>
+            {{ meeting.m_date | date:'longDate' }} <span *ngIf="meeting.m_time">· {{ meeting.m_time }}</span>
+          </time>
+
+          <h3>
+            {{ meeting.title }}
+          </h3>
+
+          <p>
+            {{ meeting.description || 'Community meeting scheduled.' }}
+          </p>
+
+          <div class="notice-meta" *ngIf="meeting.location || meeting.called_by">
+            <span *ngIf="meeting.location">
+              📍 {{ meeting.location }}
+            </span>
+            <span *ngIf="meeting.called_by">
+              👤 {{ meeting.called_by }}
+            </span>
+          </div>
+
+          <a href="javascript:void(0)" (click)="openMeetingModal(meeting)" class="link-cta">
+            Read More →
+          </a>
+
+        </article>
+
+
+      </div>
+
+
+      <div class="center-cta">
+
+        <a
+          routerLink="/sign-in"
+          class="btn btn-outline"
+        >
+          View All Notices &amp; Meetings
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- NOTICE / MEETING DETAIL MODAL -->
+    <div
+      class="notice-modal-backdrop"
+      [class.open]="selectedNoticeModal !== null"
+      (click)="closeNoticeModal()"
+      *ngIf="selectedNoticeModal"
+    >
+      <div class="notice-modal-content" (click)="$event.stopPropagation()">
+        <button
+          type="button"
+          class="notice-modal-close"
+          aria-label="Close"
+          (click)="closeNoticeModal()"
+        >
+          &times;
+        </button>
+
+        <span
+          class="notice-tag"
+          [class.tag-blue]="selectedNoticeModal.type === 'Notice'"
+          [class.tag-violet]="selectedNoticeModal.type === 'Meeting'"
+        >
+          {{ selectedNoticeModal.type }}
+        </span>
+
+        <h3>{{ selectedNoticeModal.title }}</h3>
+
+        <div class="notice-modal-details">
+          <div>
+            <strong>📅 Date:</strong> {{ selectedNoticeModal.date | date:'fullDate' }}
+            <span *ngIf="selectedNoticeModal.time"> at {{ selectedNoticeModal.time }}</span>
+          </div>
+          <div *ngIf="selectedNoticeModal.location">
+            <strong>📍 Location:</strong> {{ selectedNoticeModal.location }}
+          </div>
+          <div *ngIf="selectedNoticeModal.by">
+            <strong>👤 By:</strong> {{ selectedNoticeModal.by }}
+          </div>
+          <div *ngIf="selectedNoticeModal.status">
+            <strong>📌 Status:</strong> {{ selectedNoticeModal.status }}
+          </div>
+        </div>
+
+        <p class="notice-modal-desc">{{ selectedNoticeModal.description }}</p>
+      </div>
+    </div>
+
+  </section>
+
+
+<!-- TESTIMONIALS -->
+<section
+  class="testimonials"
+  id="testimonials"
+>
+
+  <div class="container">
+
+    <!-- SECTION HEADING -->
+    <div class="section-head reveal">
+
+      <span class="eyebrow-label">
+        Testimonials
+      </span>
+
+      <h2>
+        What Our Residents Say
+      </h2>
+
+    </div>
+
+
+    <!-- TESTIMONIAL CAROUSEL -->
+    <div class="t-carousel">
+
+      <!-- SLIDER TRACK -->
+      <div
+        class="t-track"
+        id="tTrack"
+        [style.transform]="testimonialTransform"
+        (mouseenter)="pauseTestimonialAuto()"
+        (mouseleave)="resumeTestimonialAuto()"
+      >
+
+
+        <!-- =====================================================
+             TESTIMONIAL 1
+             ===================================================== -->
+
+        <blockquote class="t-slide">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <p>
+            "Living here feels less like living in
+            an apartment and more like being part of
+            a wonderful community."
+          </p>
+
+          <footer>
+
+            <img
+              src="assets/images/yogesh.jpeg"
+              alt="Yogesh Sharma"
+              loading="lazy"
+            />
+
+            <div>
+
+              <strong>
+                Yogesh Sharma
+              </strong>
+
+              <small>
+                Block B, Radha Krishna Tower
+              </small>
+
+            </div>
+
+          </footer>
+
+        </blockquote>
+
+
+        <!-- =====================================================
+             TESTIMONIAL 2
+             ===================================================== -->
+
+        <blockquote class="t-slide">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <p>
+            "The community management has made
+            everyday living much easier and more
+            organized."
+          </p>
+
+          <footer>
+
+            <img
+              src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=100&q=80"
+              alt="Suresh Gadula"
+              loading="lazy"
+            />
+
+            <div>
+
+              <strong>
+                Suresh Gadula
+              </strong>
+
+              <small>
+                Block A, Radha Krishna Tower
+              </small>
+
+            </div>
+
+          </footer>
+
+        </blockquote>
+
+
+        <!-- =====================================================
+             TESTIMONIAL 3
+             ===================================================== -->
+
+        <blockquote class="t-slide">
+
+          <div class="stars">
+            ★★★★★
+          </div>
+
+          <p>
+            "Excellent amenities, security and a
+            very friendly neighborhood."
+          </p>
+
+          <footer>
+
+            <img
+              src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=100&q=80"
+              alt="Padala Suman Chand Goud"
+              loading="lazy"
+            />
+
+            <div>
+
+              <strong>
+                Padala Suman Chand Goud
+              </strong>
+
+              <small>
+                Block D, Radha Krishna Tower
+              </small>
+
+            </div>
+
+          </footer>
+
+        </blockquote>
+
+      </div>
+
+
+      <!-- =====================================================
+           CONTROLS
+           ===================================================== -->
+
+      <div class="t-controls">
+
+        <!-- PREVIOUS -->
+        <button
+          type="button"
+          id="tPrev"
+          aria-label="Previous testimonial"
+          (click)="previousTestimonial()"
+        >
+          ‹
+        </button>
+
+
+        <!-- DOTS -->
+        <div
+          class="t-dots"
+          id="tDots"
+          role="tablist"
+          aria-label="Testimonial slides"
+        >
+
+          @for (i of testimonialIndexes; track i) {
+
+            <button
+              type="button"
+              [class.active]="currentTestimonial === i"
+              [attr.aria-label]="'Go to testimonial ' + (i + 1)"
+              [attr.aria-selected]="currentTestimonial === i"
+              role="tab"
+              (click)="goToTestimonial(i)"
+            >
+            </button>
+
+          }
+
+        </div>
+
+
+        <!-- NEXT -->
+        <button
+          type="button"
+          id="tNext"
+          aria-label="Next testimonial"
+          (click)="nextTestimonial()"
+        >
+          ›
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+  <!-- HIGHLIGHTS -->
+  <section class="highlights">
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <span class="eyebrow-label">
+          Everyday Convenience
+        </span>
+
+        <h2>
+          Designed For Families, Seniors &amp; Professionals
+        </h2>
+
+      </div>
+
+
+      <div class="highlight-grid">
+
+        <div class="highlight-card reveal">
+          <div class="h-icon g-blue">🚇</div>
+          <h3>Proximity to NGRI Metro</h3>
+          <p>
+            Convenient access to Hyderabad's Metro network, connecting residents smoothly across the city.
+          </p>
+        </div>
+
+
+        <div class="highlight-card reveal">
+          <div class="h-icon g-violet">🏥</div>
+          <h3>Healthcare at Hand</h3>
+          <p>
+            Hospitals, clinics, and 24/7 pharmacies nearby provide peace of mind for families and senior citizens.
+          </p>
+        </div>
+
+
+        <div class="highlight-card reveal">
+          <div class="h-icon g-cyan">🛒</div>
+          <h3>Daily Essentials Nearby</h3>
+          <p>
+            Fresh groceries, supermarkets, and daily-use shops within walking distance for effortless living.
+          </p>
+        </div>
+
+
+        <div class="highlight-card reveal">
+          <div class="h-icon g-amber">🌳</div>
+          <h3>Parks &amp; Green Spaces</h3>
+          <p>
+            Quiet neighbourhood parks and walking spaces for morning exercise and children's recreation.
+          </p>
+        </div>
+
+
+        <div class="highlight-card reveal">
+          <div class="h-icon g-green">🏛️</div>
+          <h3>Nearly 3 Decades of Heritage</h3>
+          <p>
+            Constructed in 1997, Radha Krishna Tower is an established community with deep roots in Habsiguda.
+          </p>
+        </div>
+
+
+        <div class="highlight-card reveal">
+          <div class="h-icon g-blue">🛡️</div>
+          <h3>24/7 Gated Security</h3>
+          <p>
+            Round-the-clock trained guards, CCTV monitoring, and full resident portal support.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+  <section class="portal-cta">
+
+    <div
+      class="cta-shape s1"
+      aria-hidden="true"
+    ></div>
+
+    <div
+      class="cta-shape s2"
+      aria-hidden="true"
+    ></div>
+
+    <div class="container cta-inner reveal">
+
+      <h2>
+        Radha Krishna Tower Resident Portal
+      </h2>
+
+      <p>
+        Welcome to the official community platform for Radha Krishna Tower on Captain Veera Raja Reddy Marg, Habsiguda. Access live notices, upcoming meetings, maintenance, and announcements all in one place.
+      </p>
+
+      <div class="hero-cta">
+
+        <a
+          routerLink="/sign-in"
+          class="btn btn-white btn-lg"
+        >
+          Resident Login
+        </a>
+
+        <a
+          href="#amenities"
+          class="btn btn-outline-white btn-lg"
+        >
+          Explore Services
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CONTACT -->
+  <section
+    class="contact"
+    id="contact"
+  >
+
+    <div class="container contact-grid">
+
+      <div class="contact-info reveal">
+
+        <span class="eyebrow-label">
+          Contact
+        </span>
+
+        <h2>
+          Visit Our Community
+        </h2>
+
+        <ul class="info-list">
+
+          <li>
+            <strong>Address</strong>
+            <span>
+              Captain Veera Raja Reddy Marg, Brindavan Colony, Habsiguda, Hyderabad,
+              Telangana 500007
+            </span>
+          </li>
+
+          <li>
+            <strong>Phone</strong>
+            <span>
+              +91 98486 33188
+            </span>
+          </li>
+
+          <li>
+            <strong>Email</strong>
+            <span>
+              rkthyd1997&#64;gmail.com
+            </span>
+          </li>
+
+          <li>
+            <strong>Office Hours</strong>
+            <span>
+              Mon–Sat, 9:00 AM – 7:00 PM
+            </span>
+          </li>
+
+        </ul>
+
+
+        <div class="hero-cta">
+
+          <a
+            href="https://www.google.com/maps/dir/?api=1&destination=17.409431,78.545192"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary"
+          >
+            Get Directions
+          </a>
+
+          <a
+            href="tel:+919848633188"
+            class="btn btn-ghost"
+          >
+            Contact Management
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="contact-map"
+        role="region"
+        aria-label="Map showing the location of Radha Krishna Tower"
+      >
+
+        <!-- Place Info Card Overlay -->
+        <div class="map-place-card">
+          <span class="map-place-badge">🏢 Residential Apartment · Estd. 1997</span>
+          <h4 class="map-place-title">Radha Krishna Tower</h4>
+          <p class="map-place-address">
+            Captain Veera Raja Reddy Marg, Brindavan Colony, Habsiguda, Hyderabad, Telangana 500007
+          </p>
+
+          <div class="map-place-actions">
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=17.409431,78.545192"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="map-btn-directions"
+            >
+              <span>🧭</span> Directions
+            </a>
+
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=17.409431,78.545192"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="map-btn-view"
+            >
+              View on Google Maps ↗
+            </a>
+          </div>
+        </div>
+
+        <iframe
+          src="https://maps.google.com/maps?q=17.409431,78.545192&t=&z=17&ie=UTF8&iwloc=&output=embed"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Radha Krishna Tower Location Map"
+        ></iframe>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="site-footer">
+
+  <div class="container footer-grid">
+
+    <div class="footer-brand">
+
+      <span class="brand-text">
+        <strong>Radha Krishna Tower</strong>
+      </span>
+
+      <p>
+        Constructed in 1997 on Captain Veera Raja Reddy Marg, Habsiguda. A well-established residential apartment community providing comfort, convenience, and heritage for nearly three decades.
+      </p>
+
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>Community</h4>
+
+      <ul>
+        <li>
+          <a href="#about">About</a>
+        </li>
+
+        <li>
+          <a href="#amenities">Amenities</a>
+        </li>
+
+        <li>
+          <a href="#events">Events</a>
+        </li>
+
+        <li>
+          <a href="#gallery">Gallery</a>
+        </li>
+      </ul>
+
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>Residents</h4>
+
+      <ul>
+
+        <li>
+          <a routerLink="/sign-in">
+            Login
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/visitor">
+            Visitor Registration
+          </a>
+        </li>
+
+        <li>
+          <a href="#notices">
+            Notices
+          </a>
+        </li>
+
+        <li>
+          <a href="#amenities">
+            Services
+          </a>
+        </li>
+
+        <li>
+          <a href="#contact">
+            Contact
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="footer-col">
+
+      <h4>Contact</h4>
+
+      <ul>
+
+        <li>
+          Captain Veera Raja Reddy Marg, Habsiguda, Hyderabad 500007
+        </li>
+
+        <li>
+          +91 98486 33188
+        </li>
+
+        <li>
+          rkthyd1997&#64;gmail.com
+        </li>
+
+      </ul>
+
+
+      <div class="social-row">
+
+        <a
+          href="#"
+          aria-label="Facebook"
+        >
+          f
+        </a>
+
+        <a
+          href="#"
+          aria-label="Instagram"
+        >
+          ◎
+        </a>
+
+        <a
+          href="#"
+          aria-label="Twitter"
+        >
+          𝕏
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="footer-bottom">
+    © 2026 Radha Krishna Tower. All Rights Reserved.
+  </div>
+
+</footer>
+
+
+<!-- LIGHTBOX -->
+<div
+  class="lightbox"
+  [class.open]="lightboxOpen"
+  [attr.aria-hidden]="!lightboxOpen"
+  (click)="closeLightbox()"
+>
+
+  <button
+    type="button"
+    class="lightbox-close"
+    aria-label="Close"
+    (click)="closeLightbox()"
+  >
+    &times;
+  </button>
+
+  <img
+    [src]="lightboxImage"
+    [alt]="lightboxAlt"
+    (click)="$event.stopPropagation()"
+  />
+
+</div>

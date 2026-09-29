@@ -1,0 +1,170 @@
+<div class="visitor-page">
+
+  <!-- Background Decorations -->
+  <div class="bg-decoration bg-decoration-one"></div>
+  <div class="bg-decoration bg-decoration-two"></div>
+
+  <main class="visitor-main">
+    <div class="visitor-container">
+
+      <!-- Centered Title -->
+      <div class="page-title">
+        <div class="brand-icon">
+          <span class="material-icons">apartment</span>
+        </div>
+        <h1>Radha Krishna Tower</h1>
+        <div class="page-subtitle">
+          <span class="subtitle-line"></span>
+          <span>Visitor Registration</span>
+          <span class="subtitle-line"></span>
+        </div>
+      </div>
+
+      <!-- Visitor Form -->
+      <section class="visitor-card">
+
+        <p class="card-note">Enter your information below</p>
+
+        @if (successMessage) {
+        <div class="alert alert-success">
+          <span class="material-icons">check_circle</span>
+          <span>{{ successMessage }}</span>
+        </div>
+        }
+
+        @if (errorMessage) {
+        <div class="alert alert-error">
+          <span class="material-icons">error</span>
+          <span>{{ errorMessage }}</span>
+        </div>
+        }
+
+        <form [formGroup]="visitorForm" (ngSubmit)="submitVisitor()" novalidate>
+
+          <!-- Visitor Name -->
+          <div class="form-group">
+            <label for="visitorName">Visitor Name</label>
+
+            <div class="input-wrapper">
+              <span class="material-icons">person</span>
+
+              <input id="visitorName" type="text" formControlName="name" placeholder="Enter visitor name"
+                autocomplete="name" />
+            </div>
+          </div>
+
+
+          <!-- Flat Number - REQUIRED -->
+          <div class="form-group">
+            <label for="flatNo">
+              Flat Number <span>*</span>
+            </label>
+
+            <div class="input-wrapper" [class.input-error]="flatNo.invalid && flatNo.touched">
+              <span class="material-icons">home</span>
+
+              <select id="flatNo" formControlName="flat_no" [class.placeholder-selected]="!flatNo.value">
+                <option value="" disabled>
+                  Select flat number
+                </option>
+
+                <option value="101">101</option>
+                <option value="102">102</option>
+                <option value="103">103</option>
+                <option value="104">104</option>
+                <option value="105">105</option>
+
+                <option value="201">201</option>
+                <option value="202">202</option>
+                <option value="203">203</option>
+                <option value="204">204</option>
+                <option value="205">205</option>
+
+                <option value="301">301</option>
+                <option value="302">302</option>
+                <option value="303">303</option>
+                <option value="304">304</option>
+                <option value="305">305</option>
+
+                <option value="401">401</option>
+                <option value="402">402</option>
+                <option value="403">403</option>
+                <option value="404">404</option>
+                <option value="405">405</option>
+
+                <option value="501">501</option>
+                <option value="502">502</option>
+                <option value="503">503</option>
+                <option value="504">504</option>
+                <option value="505">505</option>
+              </select>
+
+              <span class="material-icons select-arrow">
+                expand_more
+              </span>
+            </div>
+
+            @if (flatNo.invalid && flatNo.touched) {
+            <small class="validation-message">
+              Please select a flat number.
+            </small>
+            }
+          </div>
+
+
+          <!-- Purpose -->
+          <div class="form-group">
+            <label for="purpose">Purpose of Visit</label>
+
+            <div class="input-wrapper">
+              <span class="material-icons">business_center</span>
+
+              <input id="purpose" type="text" formControlName="purpose" placeholder="Example: Meeting resident" />
+            </div>
+          </div>
+
+
+          <!-- Remarks -->
+          <div class="form-group">
+            <label for="remarks">
+              Remarks <span class="optional">Optional</span>
+            </label>
+
+            <div class="textarea-wrapper">
+              <span class="material-icons">notes</span>
+
+              <textarea id="remarks" formControlName="remarks" placeholder="Any additional information..."
+                rows="4"></textarea>
+            </div>
+          </div>
+
+
+          <!-- Submit -->
+          <button type="submit" class="submit-btn" [disabled]="isSubmitting">
+            @if (isSubmitting) {
+            <span class="spinner"></span>
+            <span>Submitting...</span>
+            } @else {
+            <span class="material-icons">send</span>
+            <span>Submit Visitor Details</span>
+            }
+          </button>
+
+
+          <p class="privacy-note">
+            <span class="material-icons">lock</span>
+            Your visitor information is submitted securely.
+          </p>
+
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="visitor-footer">
+    <p>© {{ 2026 }} Radha Krishna Tower. All rights reserved.</p>
+  </footer>
+
+</div>

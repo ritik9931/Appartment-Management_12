@@ -1,6 +1,6 @@
 {
-  "/rktapi": {
-    "target": "http://67.211.213.61",
+  "/rkt": {
+    "target": "https://yo4vts.in",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

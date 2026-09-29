@@ -42,6 +42,7 @@
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
     "ng2-charts": "^4.0.1",
+    "ngx-toastr": "^18.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "xlsx": "^0.18.5",

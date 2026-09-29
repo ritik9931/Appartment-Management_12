@@ -107,7 +107,7 @@ export class NoticeBoardComponent implements OnInit, AfterViewInit {
 
   fetchAllNotices(): void {
     this.loading = true;
-    this.http.get<NoticesApiResponse>(`/rktapi/api/rkt/GetAllNotice?t=${Date.now()}`).subscribe({
+    this.http.get<NoticesApiResponse>(`https://www.nomad.org.in/rkt/api/rkt/GetAllNotice?t=${Date.now()}`).subscribe({
       next: (response) => {
         if (response?.Data) {
          this.notices = response.Data
@@ -119,7 +119,7 @@ export class NoticeBoardComponent implements OnInit, AfterViewInit {
     description: raw.description,
     postedDate: new Date(raw.created_at),
     expiryDate: raw.exp_date ? new Date(raw.exp_date) : null,
-    attachmentUrl: raw.file_name ? `/rktapi/api/rkt/DownloadNoticeAttachment?fileName=${raw.file_name}` : null,
+    attachmentUrl: raw.file_name ? `https://www.nomad.org.in/rkt/api/rkt/DownloadNoticeAttachment?fileName=${raw.file_name}` : null,
     file_name: raw.file_name,
     created_by: raw.created_by
   }));
@@ -215,7 +215,7 @@ export class NoticeBoardComponent implements OnInit, AfterViewInit {
       created_by: localStorage.getItem('username') || 'Admin'
     };
 
-    this.http.post<any>('/rktapi/api/rkt/InsertNotice', payload, {
+    this.http.post<any>('https://www.nomad.org.in/rkt/api/rkt/InsertNotice', payload, {
       headers: { 'Content-Type': 'application/json' }
     }).subscribe({
       next: () => {
@@ -239,7 +239,7 @@ export class NoticeBoardComponent implements OnInit, AfterViewInit {
   deleteNotice(id: number): void {
     if (confirm('Are you sure you want to delete this notice?')) {
       const params = new HttpParams().set('id', id.toString());
-      this.http.get('/rktapi/api/rkt/DeleteNotice', { params }).subscribe({
+      this.http.get('/rkt/api/rkt/DeleteNotice', { params }).subscribe({
         next: () => this.fetchAllNotices(),
         error: err => {
           console.error('Delete error:', err);
@@ -264,7 +264,7 @@ export class NoticeBoardComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.http.get(`/rktapi/api/rkt/DownloadNotice`, {
+    this.http.get(`https://www.nomad.org.in/rkt/api/rkt/DownloadNotice`, {
       params: new HttpParams().set('id', notice.id.toString()),
       responseType: 'blob'
     }).subscribe({
