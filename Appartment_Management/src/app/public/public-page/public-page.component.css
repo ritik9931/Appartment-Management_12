@@ -508,6 +508,23 @@
   animation-delay: 1.8s;
 }
 
+:host .brand-mark {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+:host .brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
 @keyframes floaty {
   0%,
   100% {

@@ -61,6 +61,13 @@ export class VisitorPageComponent {
       [
         Validators.maxLength(500)
       ]
+    ],
+
+    mobile_no: [
+      '',
+      [
+        Validators.maxLength(15)
+      ]
     ]
 
   });
@@ -79,6 +86,10 @@ export class VisitorPageComponent {
 
   get remarks() {
     return this.visitorForm.controls.remarks;
+  }
+
+  get mobileNumber() {
+    return this.visitorForm.controls.mobile_no;
   }
 
   submitVisitor(): void {
